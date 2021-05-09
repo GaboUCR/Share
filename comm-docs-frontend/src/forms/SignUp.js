@@ -29,7 +29,8 @@ class SignUp extends React.Component {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email: this.state.email, password: this.state.password, name: this.state.name})};
 
-    fetch('http://127.0.0.1:5235/sign-up', requestOptions);
+    fetch('http://127.0.0.1:5000/sign-up', requestOptions).then(response => response.json())
+  .then(data => console.log(data));
 
     alert('it is done');
     event.preventDefault();
