@@ -2,7 +2,9 @@ from functools import wraps
 from flask import g, session, jsonify, Blueprint, request
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
-from server.db import get_db
+from server.database.db import get_db, print_database
+from server.database.DatabaseApi import add_user
+
 
 auth_bp = Blueprint("auth", __name__)
 
@@ -17,16 +19,24 @@ def is_logged(call):
 
     return check_credential
 
+@auth_bp.route("/database")
+def ts():
+    return str(print_database())
+
 @auth_bp.route("/sign-up", methods=("POST","GET"))
 def sign_up():
 
-    username = request.json["name"]
-    email = request.json["email"]
-    password = request.json["password"]
+    new_user = {"username":request.json["name"],"email":request.json["email"], \
+                "password":generate_password_hash(request.json["password"])}
 
-    # db = get_db().execute("INSERT INTO user")
+    msg = add_user(get_db(), new_user)
 
-    return jsonify({"success":"ok" })#username +email+ password
+    if (msg == "ok"):
+        return jsonify({"success":"ok" })
+    else:
+        return jsonify({"success":"fail", 'error':msg})
+
+
 
 @auth_bp.before_app_request
 def load_logged_in_user():

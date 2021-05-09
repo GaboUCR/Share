@@ -4,7 +4,7 @@ from os import path
 
 def createDatabase():
 
-    conn = sqlite3.connect("share.sqlite3")
+    conn = sqlite3.connect("server/database/share.sqlite3")
     cur = conn.cursor()
 
     cur.executescript("""
@@ -39,26 +39,21 @@ def createDatabase():
 
 def print_database():
 
-    conn = sqlite3.connect("share.sqlite3")
+    conn = sqlite3.connect("server/database/share.sqlite3")
     cur = conn.cursor()
 
-    cur.execute("select * from folders")
-    print("Folders: \n"+str(cur.fetchall()))
-    cur.execute("select * from file")
-    print("Files: \n"+str(cur.fetchall()))
-    cur.execute("select * from paths")
-    print("paths: \n"+str(cur.fetchall()))
+    t = cur.execute("select * from user").fetchall()
     cur.close()
     conn.close()
-
+    return t
 
 def get_db():
 
     if "db" not in g:
-        if (not path.exists("share.sqlite3")):
+        if (not path.exists("server/database/share.sqlite3")):
             createDatabase()
 
-        g.db = sqlite3.connect("share.sqlite3")
+        g.db = sqlite3.connect("server/database/share.sqlite3")
 
     return g.db
 
