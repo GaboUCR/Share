@@ -4,20 +4,8 @@ from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 from server.database.db import get_db, print_database
 from server.database.DatabaseApi import add_user
-
-
 auth_bp = Blueprint("auth", __name__)
 
-def is_logged(call):
-
-    @wraps(call)
-    def check_credential(**arguments):
-        if (g.user is None):
-            return jsonify({"logged":"false"})
-
-        return call(**arguments)
-
-    return check_credential
 
 @auth_bp.route("/database")
 def ts():
@@ -37,6 +25,16 @@ def sign_up():
         return jsonify({"success":"fail", 'error':msg})
 
 
+def is_logged(call):
+
+    @wraps(call)
+    def check_credential(**arguments):
+        if (g.user is None):
+            return jsonify({"logged":"false"})
+
+        return call(**arguments)
+
+    return check_credential
 
 @auth_bp.before_app_request
 def load_logged_in_user():
