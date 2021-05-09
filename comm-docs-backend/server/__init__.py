@@ -1,6 +1,6 @@
 from flask import Flask
-from server.DatabaseApi import data
+from server.auth import auth_bp
 
 
 app = Flask(__name__)
-app.register_blueprint(data)
+app.register_blueprint(auth_bp)

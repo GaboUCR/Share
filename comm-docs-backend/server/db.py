@@ -4,32 +4,34 @@ from os import path
 
 def createDatabase():
 
-    conn = sqlite3.connect("comm-docs.sqlite3")
+    conn = sqlite3.connect("share.sqlite3")
     cur = conn.cursor()
 
     cur.executescript("""
 
-    create table folders(
-        folderName TEXT,
+    create table user(
+        username TEXT,
+        email TEXT,
+        password TEXT,
         id INTEGER PRIMARY KEY
     );
 
-    create table file(
+    create table post(
         title TEXT,
-        code TEXT,
-        folder_id INTEGER,
+        body TEXT,
+        community_id INTEGER,
+        user_id INTEGER,
         id INTEGER PRIMARY KEY
     );
 
-    create table paths(
-        to_folder INTEGER,
-        from_folder INTEGER,
+    create table community(
+        name TEXT,
+        user_id INTEGER,
         id INTEGER PRIMARY KEY
 
     );
     """)
 
-    cur.execute("insert into folders(folderName) values(?)",("root",))
     conn.commit()
     cur.close()
     conn.close()
@@ -37,7 +39,7 @@ def createDatabase():
 
 def print_database():
 
-    conn = sqlite3.connect("MyCode.db")
+    conn = sqlite3.connect("share.sqlite3")
     cur = conn.cursor()
 
     cur.execute("select * from folders")
@@ -53,11 +55,10 @@ def print_database():
 def get_db():
 
     if "db" not in g:
-        if (not path.exists("comm-docs.sqlite3")):
+        if (not path.exists("share.sqlite3")):
             createDatabase()
 
-        g.db = sqlite3.connect("comm-docs.sqlite3")
-        g.db.row_factory = sqlite3.Row
+        g.db = sqlite3.connect("share.sqlite3")
 
     return g.db
 
@@ -70,15 +71,14 @@ def close_db():
         db.close()
 
 
-def main():
+# def main():
 
     # createDatabase()
     # saveCodeFromFile("wl.py", "<@", "/@",2)
     # addFolder("perro",2)
     # print_database()
-    print(__name__)
+    # print(__name__)
 
-    
+
 # if __name__ == "__main__":
-#     # main()
-#     print(__name__)
+#     main()

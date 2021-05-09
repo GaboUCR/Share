@@ -16,8 +16,6 @@ class selfDoc(object):
         return {"title": self.title, "code": self.code}
 
 
-@data.route("/")
-
 
 def getMarkedCode(filepath, startTag, endTag):
 
