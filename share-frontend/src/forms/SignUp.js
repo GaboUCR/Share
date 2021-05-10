@@ -32,7 +32,6 @@ class SignUp extends React.Component {
     fetch('http://127.0.0.1:5000/sign-up', requestOptions).then(response => response.json())
   .then(data => console.log(data));
 
-    alert('it is done');
     event.preventDefault();
   }
 

@@ -3,7 +3,7 @@ from server.msg import SignFormMsg
 from flask import g, session, jsonify, Blueprint, request
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
-from server.database.db import get_db, print_database
+from server.database.db import print_database
 from server.database.DatabaseApi import add_user
 auth_bp = Blueprint("auth", __name__)
 
@@ -13,7 +13,7 @@ def sign_up():
     new_user = {"username":request.json["name"],"email":request.json["email"], \
                 "password":generate_password_hash(request.json["password"])}
 
-    msg = add_user(get_db(), new_user)
+    msg = add_user(new_user)
 
     if (msg == SignFormMsg.ok):
         #format
@@ -36,7 +36,6 @@ def is_logged(call):
 
 
 @auth_bp.route("/database")
-@is_logged
 def ts():
     return str(print_database())
 
