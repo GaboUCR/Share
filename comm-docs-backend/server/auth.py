@@ -1,15 +1,11 @@
 from functools import wraps
+from server.msg import SignFormMsg
 from flask import g, session, jsonify, Blueprint, request
 from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 from server.database.db import get_db, print_database
 from server.database.DatabaseApi import add_user
 auth_bp = Blueprint("auth", __name__)
-
-
-@auth_bp.route("/database")
-def ts():
-    return str(print_database())
 
 @auth_bp.route("/sign-up", methods=("POST","GET"))
 def sign_up():
@@ -19,10 +15,11 @@ def sign_up():
 
     msg = add_user(get_db(), new_user)
 
-    if (msg == "ok"):
-        return jsonify({"success":"ok" })
-    else:
-        return jsonify({"success":"fail", 'error':msg})
+    if (msg == SignFormMsg.ok):
+        #format
+        return jsonify({"success":"true" })
+    elif(msg == SignFormMsg.repeated_name):
+        return jsonify({"success":"false", 'error':'repeated name'})
 
 
 def is_logged(call):
@@ -30,11 +27,18 @@ def is_logged(call):
     @wraps(call)
     def check_credential(**arguments):
         if (g.user is None):
-            return jsonify({"logged":"false"})
+            #!!!!consider enum , think of format
+            return jsonify({"success":"false", "error":"not logged"})
 
         return call(**arguments)
 
     return check_credential
+
+
+@auth_bp.route("/database")
+@is_logged
+def ts():
+    return str(print_database())
 
 @auth_bp.before_app_request
 def load_logged_in_user():

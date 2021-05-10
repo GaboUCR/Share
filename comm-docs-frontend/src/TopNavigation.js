@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 
+
 function TopNavigation(props){
 
 	return(
@@ -15,7 +16,7 @@ function TopNavigation(props){
 
     <nav id="top"  className = "flex bg-light-blue">
       <Link to = "/" className ="m-5">Gabozon</Link>
-      
+
       <nav className="my-5 absolute right-0" >
         <Link to = "/log-in" className="mx-5">Log in</Link>
         <Link to = "/sign-up" className ="mx-5" >Sign up</Link>
