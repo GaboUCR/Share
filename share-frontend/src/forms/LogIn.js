@@ -23,13 +23,12 @@ class LogIn extends React.Component {
     const requestOptions = {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({name: this.state.name, password: this.state.password})};
+    body: JSON.stringify({user: this.state.name, password: this.state.password})};
 
-    fetch('http://127.0.0.1:5235', requestOptions);
-
-    alert('it is done');
+    fetch('http://127.0.0.1:5000/log-in', requestOptions).then(response => response.json())
+  .then(data => console.log(data));
     event.preventDefault();
-      }
+    }
 
   render() {
     return (
