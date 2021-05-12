@@ -3,16 +3,23 @@ from flask import g
 from os import path
 
 def createDatabase():
-
     conn = sqlite3.connect("server/database/share.sqlite3")
     cur = conn.cursor()
 
     cur.executescript("""
 
+    create table cookie(
+        cookie_hash TEXT,
+        user_id TEXT,
+        date TEXT,
+        id INTEGER PRIMARY KEY
+    );
+
     create table user(
         username TEXT,
         email TEXT,
         password TEXT,
+        cookie TEXT,
         id INTEGER PRIMARY KEY
     );
 
@@ -64,16 +71,3 @@ def close_db():
 
     if db is not None:
         db.close()
-
-
-# def main():
-
-    # createDatabase()
-    # saveCodeFromFile("wl.py", "<@", "/@",2)
-    # addFolder("perro",2)
-    # print_database()
-    # print(__name__)
-
-
-# if __name__ == "__main__":
-#     main()

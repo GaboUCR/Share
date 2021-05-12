@@ -46,7 +46,7 @@ function TopNavigationLogged(props){
       <nav id="top"  className = "flex bg-light-blue">
         <Link to = "/" className ="m-5">Share</Link>
 
-        <a className="my-5 absolute right-0">{props.username}</a>
+        <p className="my-5 absolute right-0">{props.username}</p>
 
       </nav>
 
@@ -62,10 +62,22 @@ function TopNavigationLogged(props){
 
 function TopNavigation(){
   const requestOptions = {method: 'GET'};
+  let user = "";
+  fetch('http://127.0.0.1:5000/user', requestOptions).then(response => response.json())
+  .then(data => { console.log(data);
+    // if (data.success){
+    //   user = data.user
+    // }
 
-  fetch('http://127.0.0.1:5000/sign-up', requestOptions).then(response => response.json())
-.then(data => console.log(data));
+  });
 
+  if (user === ""){
+    return <TopNavigationNotLogged/>
+  }
+  else{
+    return <TopNavigationLogged username={user}/>
+
+  }
 
 }
 
@@ -75,4 +87,4 @@ function Home(){
 }
 
 
-export default TopNavigationNotLogged;
+export default TopNavigation;

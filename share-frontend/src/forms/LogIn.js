@@ -28,6 +28,7 @@ class LogIn extends React.Component {
     fetch('http://127.0.0.1:5000/log-in', requestOptions).then(response => response.json())
   .then(data => console.log(data));
     event.preventDefault();
+    window.location.reload(false);
     }
 
   render() {

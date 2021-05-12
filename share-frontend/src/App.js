@@ -1,9 +1,9 @@
-import TopNavigationNotLogged from "./TopNavigation.js"
+import TopNavigation from "./TopNavigation.js"
 
 
 function App() {
   return (
-    <TopNavigationNotLogged />
+    <TopNavigation />
   );
 }
 
