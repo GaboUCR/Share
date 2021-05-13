@@ -1,15 +1,7 @@
-import random
-import string
 from server.msg import SignFormMsg
 from server.database.db import get_db
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import datetime
-
-def get_random_cookie(length=40):
-    symbols = string.printable[0:len(string.printable)-5]
-    cookie = ''.join(random.choice(symbols) for i in range(length))
-
-    return cookie
 
 
 def add_user(new_user):
@@ -42,7 +34,7 @@ def get_users():
 def log_user(user):
     """
     receives hash table with the username or email and the password without hash
-    returns cookie of the logged user or -1 if it doesn't found a match
+    returns the user id of the logged user or -1 if it doesn't found a match
     """
     db = get_db()
 
@@ -54,13 +46,9 @@ def log_user(user):
         if (user['user'] == reg_user['username'] or user['user'] == reg_user['email']):
 
             if (check_password_hash(reg_user['hash'],user['password'])):
-                cookie = get_random_cookie()
-                db.execute('INSERT OR REPLACE INTO cookie(cookie_hash, date) VALUES (?, ?) WHERE user_id = ?'\
-                            , (generate_password_hash(cookie), datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), reg_user['id']))
+                return reg_user['id']
 
-                return cookie
-
-    return ""
+    return -1
 
 
 def get_username(user_id):

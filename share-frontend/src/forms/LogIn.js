@@ -26,9 +26,20 @@ class LogIn extends React.Component {
     body: JSON.stringify({user: this.state.name, password: this.state.password})};
 
     fetch('http://127.0.0.1:5000/log-in', requestOptions).then(response => response.json())
-  .then(data => console.log(data));
+    .then((data) => {
+
+      if (data.success === true){
+        console.log(data.user_id)
+        this.props.setId(data.user_id)
+      }
+
+      else if(data.error === 'wrong credential'){
+        alert('user not found')
+
+      }
+  });
     event.preventDefault();
-    window.location.reload(false);
+    // window.location.reload(false);
     }
 
   render() {

@@ -8,18 +8,10 @@ def createDatabase():
 
     cur.executescript("""
 
-    create table cookie(
-        cookie_hash TEXT,
-        user_id TEXT,
-        date TEXT,
-        id INTEGER PRIMARY KEY
-    );
-
     create table user(
         username TEXT,
         email TEXT,
         password TEXT,
-        cookie TEXT,
         id INTEGER PRIMARY KEY
     );
 

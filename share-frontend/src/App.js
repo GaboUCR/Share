@@ -1,10 +1,18 @@
 import TopNavigation from "./TopNavigation.js"
+import React, {useState} from 'react'
 
 
 function App() {
+  const[id, get_id] = useState(-1);
+
+  function idRequest(req_id){
+    console.log(req_id)
+    get_id(req_id);
+  };
+
   return (
-    <TopNavigation />
+    <TopNavigation id={id} setId={idRequest} />
   );
-}
+};
 
 export default App;

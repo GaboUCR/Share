@@ -30,8 +30,8 @@ class SignUp extends React.Component {
     body: JSON.stringify({email: this.state.email, password: this.state.password, name: this.state.name})};
 
     fetch('http://127.0.0.1:5000/sign-up', requestOptions).then(response => response.json())
-  .then(data => console.log(data));
-
+    .then(data => console.log(data));
+    alert("you are registered")
     event.preventDefault();
   }
 

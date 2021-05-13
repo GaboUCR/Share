@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {SignUp, LogIn} from "./forms"
 import {
   BrowserRouter as Router,
@@ -27,7 +27,7 @@ function TopNavigationNotLogged(props){
             <Home />
           </Route>
           <Route path="/log-in">
-            <LogIn />
+            <LogIn setId={props.setId} />
           </Route>
           <Route path="/sign-up">
             <SignUp />
@@ -39,6 +39,16 @@ function TopNavigationNotLogged(props){
 }
 
 function TopNavigationLogged(props){
+  const[username, get_username] = useState("");
+  console.log(props.id)
+  
+  const requestOptions = {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({id: props.id})};
+
+  fetch('http://127.0.0.1:5000/user', requestOptions).then(response => response.json())
+  .then((data) => {get_username(data.username)});
 
 	return(
 		<Router>
@@ -46,7 +56,7 @@ function TopNavigationLogged(props){
       <nav id="top"  className = "flex bg-light-blue">
         <Link to = "/" className ="m-5">Share</Link>
 
-        <p className="my-5 absolute right-0">{props.username}</p>
+        <p className="my-5 absolute right-0">{username}</p>
 
       </nav>
 
@@ -60,25 +70,15 @@ function TopNavigationLogged(props){
 		);
 }
 
-function TopNavigation(){
-  const requestOptions = {method: 'GET'};
-  let user = "";
-  fetch('http://127.0.0.1:5000/user', requestOptions).then(response => response.json())
-  .then(data => { console.log(data);
-    // if (data.success){
-    //   user = data.user
-    // }
+function TopNavigation(props){
 
-  });
-
-  if (user === ""){
-    return <TopNavigationNotLogged/>
+  if (props.id === -1){
+    return <TopNavigationNotLogged setId={props.setId} />
   }
+
   else{
-    return <TopNavigationLogged username={user}/>
-
+    return <TopNavigationLogged id={props.id}/>
   }
-
 }
 
 function Home(){
