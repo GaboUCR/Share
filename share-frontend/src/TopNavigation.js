@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {SignUp, LogIn} from "./forms"
+import {TextEditor} from "./posts"
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,8 +41,7 @@ function TopNavigationNotLogged(props){
 
 function TopNavigationLogged(props){
   const[username, get_username] = useState("");
-  console.log(props.id)
-  
+
   const requestOptions = {
   method: 'POST',
   headers: {'Content-Type': 'application/json'},
@@ -53,16 +53,20 @@ function TopNavigationLogged(props){
 	return(
 		<Router>
 
-      <nav id="top"  className = "flex bg-light-blue">
+      <nav className = "flex bg-light-blue">
         <Link to = "/" className ="m-5">Share</Link>
-
-        <p className="my-5 absolute right-0">{username}</p>
-
+        <nav className="my-5 mx-5 absolute right-0">
+          <Link className="mx-5" to='/write'>write a post</Link>
+          <Link className="mx-5">{username}</Link>
+        </nav>
       </nav>
 
   		<Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/write">
+          <TextEditor />
         </Route>
       </Switch>
 

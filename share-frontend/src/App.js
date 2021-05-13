@@ -3,10 +3,9 @@ import React, {useState} from 'react'
 
 
 function App() {
-  const[id, get_id] = useState(-1);
+  const[id, get_id] = useState(3);
 
   function idRequest(req_id){
-    console.log(req_id)
     get_id(req_id);
   };
 

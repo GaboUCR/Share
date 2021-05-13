@@ -1,2 +1,2 @@
-Sign up
-  
+
+add a write a post button on top navigation
