@@ -1,12 +1,13 @@
-import {useState} from "react";
+import React,{useState} from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
-function BrowseCommunities(){
+export function BrowseCommunities(){
   var comm = ["prro", "gto", "ballena"];
   var address = comm.map(c => "/communities/"+c)
   // const[components, addComponent] = useState([]);
@@ -29,7 +30,6 @@ function BrowseCommunities(){
 }
 
 function CommunityButton(props){
-
   return(
     <Link to={props.commAddress}>{props.commName}</Link>
   );
@@ -38,7 +38,44 @@ function CommunityButton(props){
 
 function Community(){
   return <h2>prro</h2>;
-
 }
 
-export default BrowseCommunities;
+export function CommunityForm(props){
+  const[commName, setName] = useState("")
+
+  function nameChange(event){
+    setName(event.target.value)
+  }
+
+  function handleSubmit(event){
+    event.preventDefault();
+
+    const requestOptions = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({comm_name: commName, user_id: props.id})};
+
+    fetch('http://127.0.0.1:5000/create-community', requestOptions).then(response => response.json())
+    .then((data) => {
+      if (data.success === true){
+        alert("Community added successfully")
+      }
+      else if(data.error === 'repeated_name'){
+        alert("That name is already taken")
+      }
+    });
+  }
+
+  return(
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="comm">Name your community</label>
+        <div>
+          <input className="border" type="text" id="comm" value={commName} onChange={nameChange}/>
+        </div>
+
+      <input type="submit" className ="" value="Submit" />
+    </form>
+
+  );
+}
+// export {BrowseCommunities, CommunityForm};

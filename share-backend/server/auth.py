@@ -19,7 +19,7 @@ def sign_up():
         return jsonify({"success":True })
 
     elif(msg == SignFormMsg.repeated_name):
-        return jsonify({"success":False, 'error':'repeated name'})
+        return jsonify({"success":False, 'error':'repeated_name'})
 
 
 @auth_bp.route('/log-in',methods=('POST','GET'))

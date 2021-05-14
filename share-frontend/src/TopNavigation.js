@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {SignUp, LogIn} from "./forms"
-import {TextEditor, BrowseCommunities} from "./posts"
+import {BrowseCommunities, CommunityForm, TextEditor} from "./posts"
 import {
   BrowserRouter as Router,
   Switch,
@@ -62,6 +62,7 @@ function TopNavigationLogged(props){
         <Link to="/communities" className="py-5">Communities</Link>
 
         <nav className="py-5 absolute right-0 space-x-5">
+          <Link className="px-5" to='/create-community'>Start your community</Link>
           <Link className="px-5" to='/write'>write a post</Link>
           <Link className="px-5">{username}</Link>
         </nav>
@@ -70,6 +71,9 @@ function TopNavigationLogged(props){
   		<Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/create-community">
+          <CommunityForm id={props.id}/>
         </Route>
         <Route exact path="/communities">
           <BrowseCommunities />
