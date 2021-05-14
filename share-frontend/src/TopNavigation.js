@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {SignUp, LogIn} from "./forms"
-import {TextEditor} from "./posts"
+import {TextEditor, BrowseCommunities} from "./posts"
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,6 +15,7 @@ function TopNavigationNotLogged(props){
 
     <nav id="top"  className = "flex bg-light-blue">
       <Link to = "/" className ="m-5">Share</Link>
+      <Link to="/communities">Communities</Link>
 
       <nav className="my-5 absolute right-0" >
         <Link to = "/log-in" className="mx-5">Log in</Link>
@@ -26,6 +27,9 @@ function TopNavigationNotLogged(props){
 		<Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route exact path="/communities">
+            <BrowseCommunities />
           </Route>
           <Route path="/log-in">
             <LogIn setId={props.setId} />
@@ -53,17 +57,22 @@ function TopNavigationLogged(props){
 	return(
 		<Router>
 
-      <nav className = "flex bg-light-blue">
-        <Link to = "/" className ="m-5">Share</Link>
-        <nav className="my-5 mx-5 absolute right-0">
-          <Link className="mx-5" to='/write'>write a post</Link>
-          <Link className="mx-5">{username}</Link>
+      <nav className = "flex bg-light-blue space-x-5">
+        <Link to = "/" className ="py-5 px-5">Share</Link>
+        <Link to="/communities" className="py-5">Communities</Link>
+
+        <nav className="py-5 absolute right-0 space-x-5">
+          <Link className="px-5" to='/write'>write a post</Link>
+          <Link className="px-5">{username}</Link>
         </nav>
       </nav>
 
   		<Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+        <Route exact path="/communities">
+          <BrowseCommunities />
         </Route>
         <Route exact path="/write">
           <TextEditor />

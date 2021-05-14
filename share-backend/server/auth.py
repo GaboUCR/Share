@@ -3,7 +3,7 @@ from server.msg import SignFormMsg
 from flask import g, session, jsonify, Blueprint, request, make_response
 from werkzeug.security import generate_password_hash
 from server.database.db import print_database
-from server.database.DatabaseApi import add_user, log_user, get_username
+from server.database.db_users_api import add_user, log_user, get_username
 auth_bp = Blueprint("auth", __name__)
 
 

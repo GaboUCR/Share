@@ -14,7 +14,6 @@ function TextEditor(){
 
   function handleSubmit(event){
     console.log(title+"\n"+body)
-
     event.preventDefault();
   }
 
