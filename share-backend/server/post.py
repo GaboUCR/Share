@@ -15,6 +15,12 @@ def start_community():
         return jsonify({"success":False, 'error':'repeated_name'})
 
 
+@post_bp.route('/get-communities-names')
+def get_comm_names():
+    comms = [{'comm_name':comm["comm_name"], 'comm_id':comm["comm_id"]} for comm in get_all_communities()]
+    return jsonify({'success':True, 'comm_names':comms})
+
+
 @post_bp.route('/check')
 def just():
     return str(get_all_communities())

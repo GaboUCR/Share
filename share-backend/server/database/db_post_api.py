@@ -24,10 +24,10 @@ def get_all_communities():
     """
     Returns hash table with the community name and username of the founder.
     """
-    comms = get_db().execute("SELECT username, name FROM user INNER JOIN community ON user.id = community.user_id")\
+    comms = get_db().execute("SELECT username, name, community.id FROM user INNER JOIN community ON user.id = community.user_id")\
             .fetchall()
 
-    return [{"comm_name":comm_name, "username":username} for (username,comm_name) in comms]
+    return [{"comm_name":comm_name, "username":username, "comm_id":comm_id} for (username,comm_name,comm_id) in comms]
 
 
 

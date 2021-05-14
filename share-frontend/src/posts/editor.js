@@ -3,6 +3,11 @@ import {useState} from "react";
 function TextEditor(){
   const[title, setTitle] = useState("")
   const[body, setbody] = useState("")
+  const[community, setCommunity] = useState("")
+
+  function communityChange(event){
+    setCommunity(event.target.value);
+  }
 
   function titleChange(event){
     setTitle(event.target.value);
@@ -13,7 +18,7 @@ function TextEditor(){
   }
 
   function handleSubmit(event){
-    console.log(title+"\n"+body)
+    console.log(title+"\n"+body+"\n"+community)
     event.preventDefault();
   }
 
@@ -21,14 +26,21 @@ function TextEditor(){
     <div className="grid justify-items-center">
       <div className = "my-16">
         <form onSubmit={handleSubmit} className = "space-y-4">
+
         <label className ="" htmlFor="Title">Title</label>
           <div>
           <input type="text" className="border w-72" id="Title" value={title} onChange={titleChange} />
           </div>
+
         <label className ="" htmlFor="body">body</label>
           <div>
           <textarea className="border h-96 w-72" id="body" value={body} onChange={bodyChange}> </textarea>
           </div>
+
+        <label htmlFor="communities">Choose a community for your post</label>
+        <div>
+        <input type="text" className="border w-72" id="communities" value={community} onChange={communityChange}/>
+        </div>
 
         <input type="submit" value="Submit"/>
         </form>
