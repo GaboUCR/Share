@@ -1,18 +1,25 @@
 from server.database.db import get_db
-from server.msg import SignFormMsg
+from server.msg import SignFormMsg, PostMsg
 
 def save_post(post):
     """
-    post is a dictionary with keys: title, body, user_id, community_id
+    post is a dictionary with keys: title, body, user_id, comm_name
     returns the id of the saved post or -1 if there was an error
     """
     db = get_db()
+    comm_id = get_community_id(post['comm_name'])
+
+    if comm_id == -1:
+        return PostMsg.community_not_found
+
     db.execute("INSERT INTO post(title, body, community_id, user_id) VALUES(?, ?, ?, ?)",\
-                post['title'], post['body'], post['community_id'], post['user_id'])
+                (post['title'], post['body'], comm_id, post['user_id']))
+    db.commit()
+    return PostMsg.ok
 
-    return db.last_insert_rowid()
 
-
+def get_posts():
+    return get_db().execute("SELECT * FROM post").fetchall()
 # def get_post_by_users(user_id):
 #     """
 #     returns every post from one user on a dictionary
@@ -28,6 +35,15 @@ def get_all_communities():
             .fetchall()
 
     return [{"comm_name":comm_name, "username":username, "comm_id":comm_id} for (username,comm_name,comm_id) in comms]
+
+
+def get_community_id(comm_name):
+    id = get_db().execute("SELECT id FROM community WHERE name=?",(comm_name,)).fetchone()
+
+    if id != None:
+        return id[0]
+    else:
+        return -1
 
 
 

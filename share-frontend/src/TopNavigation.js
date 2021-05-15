@@ -79,7 +79,7 @@ function TopNavigationLogged(props){
           <BrowseCommunities />
         </Route>
         <Route exact path="/write">
-          <TextEditor />
+          <TextEditor id={props.id} />
         </Route>
       </Switch>
 

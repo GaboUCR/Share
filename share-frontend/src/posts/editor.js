@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-function TextEditor(){
+function TextEditor(props){
   const[title, setTitle] = useState("")
   const[body, setbody] = useState("")
   const[community, setCommunity] = useState("")
@@ -18,9 +18,23 @@ function TextEditor(){
   }
 
   function handleSubmit(event){
-    console.log(title+"\n"+body+"\n"+community)
     event.preventDefault();
-  }
+    const requestOptions = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({title:title, body:body, user_id:props.id, comm_name:community})};
+
+    fetch('http://127.0.0.1:5000/add-post', requestOptions).then(response => response.json())
+    .then((data) => {
+      if (data.success === true){
+        alert("Your post was saved successfully");
+      }
+      else if(data.error === 'community_not_found'){
+        alert("That community doesn't exists");
+
+      }
+    });
+  };
 
   return(
     <div className="grid justify-items-center">
