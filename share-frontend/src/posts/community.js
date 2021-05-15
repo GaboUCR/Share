@@ -1,44 +1,32 @@
-import React,{useState} from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect
-} from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {Link} from "react-router-dom"
 
 export function BrowseCommunities(){
-  var comm = ["prro", "gto", "ballena"];
-  var address = comm.map(c => "/communities/"+c)
-  // const[components, addComponent] = useState([]);
-  // const[links, addLink] = useState([]);
-  var links =[]
-  var components = []
+  const[comm, getComms] = useState([]);
 
-  for (var i=0; i<comm.length; i++){
-    var comp = <CommunityButton commAddress={address[i]} commName={comm[i]} />;
-    links.push(comp)
+  useEffect(()=>{
+    const requestOptions = {method: 'GET'};
+
+    fetch('http://127.0.0.1:5000/get-communities-names', requestOptions).then(response => response.json())
+    .then((data) => {
+
+      getComms(data.comms.map(c => (<div className=""><Link to={"/communities/"+c.comm_name}>{c.comm_name}</Link></div>)))
+
+    },
+    (error) =>{console.log(error)}
+  )
+
+},[]);
+
+  if (comm.length === 0){
+    return <h2 className="cursor-wait text-center">Loading</h2>
+  }
+  else{
+    return <div className="grid justify-items-center py-5 space-y-5">{comm}</div>
   }
 
-  for (var i=0; i<comm.length; i++){
-    var comp = <Route path ={address[i]}> <Community /> </Route>;
-    components.push(comp)
-  }
-
-  return <Router> {links} <Switch> {components} </Switch> </Router>
-
 }
 
-function CommunityButton(props){
-  return(
-    <Link to={props.commAddress}>{props.commName}</Link>
-  );
-
-}
-
-function Community(){
-  return <h2>prro</h2>;
-}
 
 export function CommunityForm(props){
   const[commName, setName] = useState("")

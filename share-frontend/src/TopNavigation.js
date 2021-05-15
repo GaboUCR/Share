@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -25,13 +25,15 @@ function TopNavigationNotLogged(props){
 function TopNavigationLogged(props){
   const[username, get_username] = useState("");
 
-  const requestOptions = {
-  method: 'POST',
-  headers: {'Content-Type': 'application/json'},
-  body: JSON.stringify({id: props.id})};
+  useEffect(()=>{
+    const requestOptions = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({id: props.id})};
 
-  fetch('http://127.0.0.1:5000/user', requestOptions).then(response => response.json())
-  .then((data) => {get_username(data.username)});
+    fetch('http://127.0.0.1:5000/user', requestOptions).then(response => response.json())
+    .then((data) => {get_username(data.username)})},[]);
+
 
 	return(
     <nav className = "flex bg-light-blue space-x-5">

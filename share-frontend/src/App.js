@@ -23,13 +23,13 @@ function App() {
 
         <Switch>
 
-        <Route path="/log-in">
-          <LogIn setId={idRequest} />
-        </Route>
+          <Route path="/log-in">
+            <LogIn setId={idRequest} />
+          </Route>
 
-        <Route path="/sign-up">
-          <SignUp />
-        </Route>
+          <Route path="/sign-up">
+            <SignUp />
+          </Route>
 
           <Route exact path="/">
             <Home />
@@ -57,10 +57,8 @@ function App() {
 };
 
 function Home(){
-
 	return(
     <h2>This is home bitch</h2>
-
 );
 }
 

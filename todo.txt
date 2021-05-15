@@ -1,3 +1,6 @@
+Render the communities into buttons that take the user to a post component.
+  fix the routes landscape
+
 x Add a community tab
 x add a 'start your community' button
 x add a community dropdown on your editor

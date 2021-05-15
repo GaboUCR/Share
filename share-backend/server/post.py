@@ -1,6 +1,7 @@
 from server.database.db_post_api import add_community, get_all_communities, save_post, get_posts
 from flask import jsonify, Blueprint, request
 from server.msg import SignFormMsg, PostMsg
+import time
 post_bp = Blueprint("post", __name__)
 
 @post_bp.route('/create-community', methods=('POST',))
@@ -32,7 +33,8 @@ def add_post():
 @post_bp.route('/get-communities-names')
 def get_comm_names():
     comms = [{'comm_name':comm["comm_name"], 'comm_id':comm["comm_id"]} for comm in get_all_communities()]
-    return jsonify({'success':True, 'comm_names':comms})
+    time.sleep(5)
+    return jsonify({'success':True, 'comms':comms})
 
 
 @post_bp.route('/check')
