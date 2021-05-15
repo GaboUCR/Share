@@ -1,6 +1,4 @@
 import React, {useState} from "react";
-import {SignUp, LogIn} from "./forms"
-import {BrowseCommunities, CommunityForm, TextEditor} from "./posts"
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,8 +9,6 @@ import {
 function TopNavigationNotLogged(props){
 
 	return(
-		<Router>
-
     <nav id="top"  className = "flex bg-light-blue">
       <Link to = "/" className ="m-5">Share</Link>
       <Link to="/communities" className ="m-5">Communities</Link>
@@ -23,23 +19,6 @@ function TopNavigationNotLogged(props){
       </nav>
 
     </nav>
-
-		<Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/communities">
-            <BrowseCommunities />
-          </Route>
-          <Route path="/log-in">
-            <LogIn setId={props.setId} />
-          </Route>
-          <Route path="/sign-up">
-            <SignUp />
-          </Route>
-    </Switch>
-
-		</Router>
 		);
 }
 
@@ -55,9 +34,7 @@ function TopNavigationLogged(props){
   .then((data) => {get_username(data.username)});
 
 	return(
-		<Router>
-
-      <nav className = "flex bg-light-blue space-x-5">
+    <nav className = "flex bg-light-blue space-x-5">
         <Link to = "/" className ="py-5 px-5">Share</Link>
         <Link to="/communities" className="py-5">Communities</Link>
 
@@ -67,26 +44,6 @@ function TopNavigationLogged(props){
           <Link className="px-5">{username}</Link>
         </nav>
       </nav>
-
-  		<Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route exact path="/create-community">
-          <CommunityForm id={props.id}/>
-        </Route>
-        <Route exact path="/communities">
-          <BrowseCommunities />
-        </Route>
-        <Route exact path="/write">
-          <TextEditor id={props.id} />
-        </Route>
-        <Route exact path="/patito">
-          <h2>perrito </h2>
-        </Route>
-      </Switch>
-
-		</Router>
 		);
 }
 
@@ -100,14 +57,5 @@ function TopNavigation(props){
     return <TopNavigationLogged id={props.id}/>
   }
 }
-
-function Home(){
-
-	return(
-    <h2>This is home bitch</h2>
-
-);
-}
-
 
 export default TopNavigation;
