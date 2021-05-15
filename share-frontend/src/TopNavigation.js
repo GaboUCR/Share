@@ -15,7 +15,7 @@ function TopNavigationNotLogged(props){
 
     <nav id="top"  className = "flex bg-light-blue">
       <Link to = "/" className ="m-5">Share</Link>
-      <Link to="/communities">Communities</Link>
+      <Link to="/communities" className ="m-5">Communities</Link>
 
       <nav className="my-5 absolute right-0" >
         <Link to = "/log-in" className="mx-5">Log in</Link>
@@ -81,6 +81,9 @@ function TopNavigationLogged(props){
         <Route exact path="/write">
           <TextEditor id={props.id} />
         </Route>
+        <Route exact path="/patito">
+          <h2>perrito </h2>
+        </Route>
       </Switch>
 
 		</Router>
@@ -100,7 +103,10 @@ function TopNavigation(props){
 
 function Home(){
 
-	return <h1>This is home bitch</h1>;
+	return(
+    <h2>This is home bitch</h2>
+
+);
 }
 
 

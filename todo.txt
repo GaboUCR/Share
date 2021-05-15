@@ -1,5 +1,4 @@
 x Add a community tab
-
 x add a 'start your community' button
-xadd a community dropdown on your editor
-connect your editor to the backend
+x add a community dropdown on your editor
+x connect your editor to the backend
