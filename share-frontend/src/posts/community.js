@@ -1,5 +1,36 @@
 import React, {useState, useEffect} from "react";
-import {Link} from "react-router-dom"
+import {Link, useParams} from "react-router-dom"
+
+export function CommunityPosts(){
+  const[posts, getPosts] = useState([]);
+  let {commName} = useParams();
+
+  useEffect(()=>{
+    const requestOptions = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({comm_name:commName})};
+
+    fetch('http://127.0.0.1:5000/get-posts-preview-by-community', requestOptions).then(response => response.json())
+    .then((data) => {
+
+      getPosts(data.posts.map(c => (<div className=""><Link to={"/communities/"+commName+"/"+c.title}>{c.title}<div>writen by {c.username}</div></Link></div>)))
+
+    },
+    (error) =>{console.log(error)}
+  )
+
+},[]);
+
+  if (posts.length === 0){
+    return <h2 className="cursor-wait text-center">Loading</h2>
+  }
+  else{
+    return <div className="grid justify-items-center py-5 space-y-5">{posts}</div>
+  }
+
+}
+
 
 export function BrowseCommunities(){
   const[comm, getComms] = useState([]);
