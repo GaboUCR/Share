@@ -35,12 +35,10 @@ def serve_community_posts_info():
     posts = get_posts_preview_by_community(request.json['comm_name'])
 
     if (posts == []):
-        return jsonify({"success":False, 'error':'community_not_found'})
+        return jsonify({"success":False, 'error':'empty'})
 
     else:
         return jsonify({'success':True, 'posts':posts})
-
-
 
 
 @post_bp.route('/get-communities-names')

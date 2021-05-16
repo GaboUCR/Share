@@ -14,13 +14,18 @@ export function CommunityPosts(){
     fetch('http://127.0.0.1:5000/get-posts-preview-by-community', requestOptions).then(response => response.json())
     .then((data) => {
 
-      getPosts(data.posts.map(c => (<div className=""><Link to={"/communities/"+commName+"/"+c.title}>{c.title}<div>writen by {c.username}</div></Link></div>)))
+      if (data.success ===true){
+      getPosts(data.posts.map(c => (<div className="">
+      <Link to={"/communities/"+commName+"/"+c.title}>{c.title}<div>writen by {c.username}</div></Link></div>)))
 
-    },
-    (error) =>{console.log(error)}
-  )
+    }else if(data.error === "empty") {
+      alert("This community doesn't have any post")
 
-},[]);
+    }
+
+    })
+
+    },[]);
 
   if (posts.length === 0){
     return <h2 className="cursor-wait text-center">Loading</h2>
