@@ -1,4 +1,4 @@
-from server.database.db_post_api import add_community, get_all_communities, save_post, get_posts_preview_by_community
+from server.database.db_post_api import add_community, get_all_communities, save_post, get_posts_preview_by_community, get_post_by_name
 from flask import jsonify, Blueprint, request
 from server.msg import SignFormMsg, PostMsg
 import time
@@ -28,6 +28,16 @@ def add_post():
 
     elif(msg == PostMsg.community_not_found):
         return jsonify({"success":False, 'error':'community_not_found'})
+
+
+@post_bp.route('/get-post-by-name',  methods=('POST',))
+def serve_post():
+    post = get_post_by_name(request.json['post_name'])
+    if (post == {}):
+        return jsonify({"success":False, 'error':'empty'})
+
+    else:
+        return jsonify({'success':True, 'post':post})
 
 
 @post_bp.route('/get-posts-preview-by-community',  methods=('POST',))

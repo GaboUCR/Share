@@ -36,6 +36,37 @@ export function CommunityPosts(){
 
 }
 
+export function Post(){
+  const[post, getPost] = useState([]);
+  let {postName} = useParams();
+
+  useEffect(()=>{
+    const requestOptions = {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({post_name:postName})};
+
+    fetch('http://127.0.0.1:5000/get-post-by-name', requestOptions).then(response => response.json())
+    .then((data) => {
+
+      if (data.success === true){
+      getPost(<div className="grid justify-items-center py-5 space-y-5"> <h2>{postName}</h2>
+      <div>created by {data.post.username}</div> <div>{data.post.body}</div> </div>);
+
+    }else if(data.error === "empty") {
+      alert("there is no post with that name")
+    }
+    })
+    },[]);
+
+  if (post.length === 0){
+    return <h2 className="cursor-wait text-center">Loading</h2>
+  }
+  else{
+    return <div>{post}</div>
+  }
+
+}
 
 export function BrowseCommunities(){
   const[comm, getComms] = useState([]);
@@ -62,6 +93,7 @@ export function BrowseCommunities(){
   }
 
 }
+
 
 
 export function CommunityForm(props){

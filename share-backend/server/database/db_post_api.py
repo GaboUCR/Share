@@ -18,6 +18,18 @@ def save_post(post):
     return PostMsg.ok
 
 
+def get_post_by_name(post_name):
+    query = """SELECT user.username, post.body FROM post INNER JOIN user ON user.id = post.user_id
+               WHERE post.title = ?"""
+
+    post = get_db().execute(query,(post_name,)).fetchone()
+
+    if (post == None):
+        return {}
+
+    return {"body":post[1], "username":post[0]}
+
+
 def get_posts_preview_by_community(comm_name):
     query = """SELECT post.title, user.username FROM post INNER JOIN user ON user.id = post.user_id
                INNER JOIN community ON community.id = post.community_id WHERE community.name = ?"""

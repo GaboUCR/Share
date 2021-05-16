@@ -1,7 +1,7 @@
 import TopNavigation from "./TopNavigation.js"
 import React, {useState} from 'react'
 import {SignUp, LogIn} from "./forms"
-import {BrowseCommunities, CommunityForm, TextEditor, CommunityPosts} from "./posts"
+import {BrowseCommunities, CommunityForm, TextEditor, CommunityPosts, Post} from "./posts"
 import {
   BrowserRouter as Router,
   Switch,
@@ -45,6 +45,10 @@ function App() {
 
           <Route exact path="/communities/:commName">
             <CommunityPosts />
+          </Route>
+
+          <Route exact path="/communities/:commName/:postName">
+            <Post />
           </Route>
 
           <Route exact path="/write">
