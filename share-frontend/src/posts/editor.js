@@ -38,8 +38,8 @@ function TextEditor(props){
 
   return(
     <div className="grid justify-items-center">
-      <div className = "my-16">
-        <form onSubmit={handleSubmit} className = "space-y-4">
+      <div className = "my-16 outline-editor bg-white">
+        <form onSubmit={handleSubmit} className = "space-y-4 m-6">
 
         <label className ="" htmlFor="Title">Title</label>
           <div>

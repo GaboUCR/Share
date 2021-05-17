@@ -123,15 +123,20 @@ export function CommunityForm(props){
   }
 
   return(
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="comm">Name your community</label>
-        <div>
-          <input className="border" type="text" id="comm" value={commName} onChange={nameChange}/>
-        </div>
+    <div className="grid justify-items-center">
+      <div className = "my-16">
 
-      <input type="submit" className ="" value="Submit" />
-    </form>
+        <form className="m-10" onSubmit={handleSubmit}>
+          <label htmlFor="comm">Name your community</label>
+            <div>
+              <input className="border" type="text" id="comm" value={commName} onChange={nameChange}/>
+            </div>
 
+          <input type="submit" className ="" value="Submit" />
+        </form>
+
+    </div>
+  </div>
   );
 }
 // export {BrowseCommunities, CommunityForm};

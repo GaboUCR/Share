@@ -6,10 +6,11 @@ import {
   Link
 } from "react-router-dom";
 
+
 function TopNavigationNotLogged(props){
 
 	return(
-    <nav id="top"  className = "flex bg-light-blue">
+    <nav className = "flex bg-top-nav outline-top-nav">
       <Link to = "/" className ="m-5">Share</Link>
       <Link to="/communities" className ="m-5">Communities</Link>
 
@@ -34,16 +35,15 @@ function TopNavigationLogged(props){
     fetch('http://127.0.0.1:5000/user', requestOptions).then(response => response.json())
     .then((data) => {get_username(data.username)})},[]);
 
-
 	return(
-    <nav className = "flex bg-light-blue space-x-5">
-        <Link to = "/" className ="py-5 px-5">Share</Link>
-        <Link to="/communities" className="py-5">Communities</Link>
+    <nav className = "flex bg-top-nav">
+        <Link to = "/" className ="p-4 hover:bg-nav-link text-nav-link-text">Share</Link>
+        <Link to="/communities" className="p-4 hover:bg-nav-link text-nav-link-text">Communities</Link>
 
-        <nav className="py-5 absolute right-0 space-x-5">
-          <Link className="px-5" to='/create-community'>Start your community</Link>
-          <Link className="px-5" to='/write'>write a post</Link>
-          <Link className="px-5">{username}</Link>
+        <nav className="py-4 absolute right-0">
+          <Link className="p-4 hover:bg-nav-link text-nav-link-text" to='/create-community'>Start your community</Link>
+          <Link className="p-4 hover:bg-nav-link text-nav-link-text" to='/write'>write a post</Link>
+          <Link className="p-4 hover:bg-nav-link text-nav-link-text">{username}</Link>
         </nav>
       </nav>
 		);

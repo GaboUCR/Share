@@ -4,10 +4,19 @@ module.exports = {
   theme: {
     colors: {
       // Build your palette here
-      "light-blue" : "#93C5FD",
-      "post-background": "#FCA5A5",
+      "top-nav" : "#E28048",
+      "background": "#FFE2D6",
+      "white" : "#F8FFFC",
+      "nav-link" : "#FC5C00",
+      "nav-link-text": "#451C00"
     },
-
+    extend: {
+        outline: {
+          editor : '2px solid #BDEED7',
+          "top-nav" : '2px solid #BDEED7',
+          "nav-link" : '1px solid #BDEED7',
+        }
+      }
   },
   variants: {
 
