@@ -25,6 +25,7 @@ def createDatabase():
 
     create table community(
         name TEXT,
+        description TEXT,
         user_id INTEGER,
         id INTEGER PRIMARY KEY
 
@@ -41,7 +42,7 @@ def print_database():
     conn = sqlite3.connect("server/database/share.sqlite3")
     cur = conn.cursor()
 
-    t = cur.execute("select * from user").fetchall()
+    t = cur.execute("select * from community").fetchall()
     cur.close()
     conn.close()
     return t

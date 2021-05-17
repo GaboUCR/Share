@@ -14,7 +14,7 @@ export function CommunityPosts(){
     fetch('http://127.0.0.1:5000/get-posts-preview-by-community', requestOptions).then(response => response.json())
     .then((data) => {
 
-      if (data.success ===true){
+      if (data.success === true){
       getPosts(data.posts.map(c => (<div className="">
       <Link to={"/communities/"+commName+"/"+c.title}>{c.title}<div>writen by {c.username}</div></Link></div>)))
 
@@ -65,8 +65,18 @@ export function Post(){
   else{
     return <div>{post}</div>
   }
-
 }
+
+function CommunityTumbnail(props){
+  const name =  <div className="text-center font-oxy font-black text-3xl">{props.comm_name}</div>
+  const author = <div className="text-center font-oxy font-normal">by {props.author}</div>
+  const description = <div className="font-oxy font-semibold">{props.description}</div>
+
+  const comm = <div className="border rounded border-bor-comm space-y-2 px-24 py-5 mx-24 my-5">{name}{author}{description}</div>
+  return(
+    <Link to={"/communities/"+props.comm_name}>{comm}</Link>
+  )
+};
 
 export function BrowseCommunities(){
   const[comm, getComms] = useState([]);
@@ -77,7 +87,8 @@ export function BrowseCommunities(){
     fetch('http://127.0.0.1:5000/get-communities-names', requestOptions).then(response => response.json())
     .then((data) => {
 
-      getComms(data.comms.map(c => (<div className=""><Link to={"/communities/"+c.comm_name}>{c.comm_name}</Link></div>)))
+      getComms(data.comms.map(c => (<CommunityTumbnail comm_name={c.comm_name}
+                description={c.comm_description} author={c.username} />)))
 
     },
     (error) =>{console.log(error)}
@@ -91,16 +102,17 @@ export function BrowseCommunities(){
   else{
     return <div className="grid justify-items-center py-5 space-y-5">{comm}</div>
   }
-
 }
-
-
-
 export function CommunityForm(props){
   const[commName, setName] = useState("")
+  const[commDescription, setDescription] = useState("")
 
   function nameChange(event){
     setName(event.target.value)
+  }
+
+  function descriptionChange(event){
+    setDescription(event.target.value)
   }
 
   function handleSubmit(event){
@@ -109,7 +121,7 @@ export function CommunityForm(props){
     const requestOptions = {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({comm_name: commName, user_id: props.id})};
+    body: JSON.stringify({comm_name: commName, comm_description:commDescription, user_id: props.id})};
 
     fetch('http://127.0.0.1:5000/create-community', requestOptions).then(response => response.json())
     .then((data) => {
@@ -124,12 +136,17 @@ export function CommunityForm(props){
 
   return(
     <div className="grid justify-items-center">
-      <div className = "my-16">
+      <div className = "my-10">
 
         <form className="m-10" onSubmit={handleSubmit}>
           <label htmlFor="comm">Name your community</label>
             <div>
-              <input className="border" type="text" id="comm" value={commName} onChange={nameChange}/>
+              <input className="border w-72" type="text" id="comm" value={commName} onChange={nameChange}/>
+            </div>
+
+          <label className ="" htmlFor="description">Set a description for your community</label>
+            <div>
+            <textarea className="border h-96 w-72" id="description" value={commDescription} onChange={descriptionChange}></textarea>
             </div>
 
           <input type="submit" className ="" value="Submit" />
@@ -139,4 +156,3 @@ export function CommunityForm(props){
   </div>
   );
 }
-// export {BrowseCommunities, CommunityForm};

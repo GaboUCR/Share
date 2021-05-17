@@ -46,10 +46,11 @@ def get_all_communities():
     """
     Returns hash table with the community name and username of the founder.
     """
-    comms = get_db().execute("SELECT username, name, community.id FROM user "+\
+    comms = get_db().execute("SELECT username, name, community.description, community.id FROM user "+\
                              "INNER JOIN community ON user.id = community.user_id").fetchall()
 
-    return [{"comm_name":comm_name, "username":username, "comm_id":comm_id} for (username,comm_name,comm_id) in comms]
+    return [{"comm_name":comm_name, "username":username, 'comm_description':comm_description, "comm_id":comm_id}\
+            for (username, comm_name, comm_description, comm_id) in comms]
 
 
 def get_community_id(comm_name):
@@ -71,8 +72,9 @@ def add_community(comm):
     if comm["comm_name"] in reg_comms:
         return SignFormMsg.repeated_name
 
-    db.execute("INSERT INTO community(name, user_id) VALUES(?, ?)", (comm['comm_name'], comm['user_id']))
-    id = db.lastrowid
+    db.execute("INSERT INTO community(name, description, user_id) VALUES(?, ?, ?)",\
+                (comm['comm_name'], comm['comm_description'], comm['user_id']))
+
     get_db().commit()
     db.close()
     return SignFormMsg.ok

@@ -11,7 +11,7 @@ import {
 
 
 function App() {
-  const[id, get_id] = useState(6);
+  const[id, get_id] = useState(-1);
 
   function idRequest(req_id){
     get_id(req_id);

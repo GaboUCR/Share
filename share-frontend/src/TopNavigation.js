@@ -10,7 +10,7 @@ import {
 function TopNavigationNotLogged(props){
 
 	return(
-    <nav className = "flex bg-top-nav outline-top-nav">
+    <nav className = "flex bg-top-nav">
       <Link to = "/" className ="m-5">Share</Link>
       <Link to="/communities" className ="m-5">Communities</Link>
 
