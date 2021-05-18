@@ -39,6 +39,7 @@ def get_posts_preview_by_community(comm_name):
     if (len(posts) == 0):
         return []
 
+    posts = [posts[i] for i in range(len(posts)-1,-1,-1)]
 
     return [{"title":title, "username":username, "body":body[0:len(body)//4]+"..."} for (title, username, body) in posts]
 
@@ -50,6 +51,7 @@ def get_all_communities():
     comms = get_db().execute("SELECT username, name, community.description, community.id FROM user "+\
                              "INNER JOIN community ON user.id = community.user_id").fetchall()
 
+    comms = [comms[i] for i in range(len(comms)-1,-1,-1)]
     return [{"comm_name":comm_name, "username":username, 'comm_description':comm_description, "comm_id":comm_id}\
             for (username, comm_name, comm_description, comm_id) in comms]
 

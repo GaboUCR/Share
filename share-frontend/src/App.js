@@ -91,10 +91,10 @@ function Home(props){
 
           <div className="text-center font-lato text-xl">Welcome to Share, a simple platform to share posts within communities <div className="my-3"> <button onClick={handleClick} className="font-oxy text-light-blue p-1 border rounded">Log as a guest</button> </div> </div>
 
+          <div className="grid justify-items-center text-center font-lato text-xl">Responsive<img src="/responsive1.png" /></div>
+
           <div className="grid justify-items-center text-center font-lato font-bold text-3xl">Made on<img src="/react-logo.jpg" /> <img src="/flask-logo.jpg" />  </div>
 
-          <div className="text-center font-lato text-xl">Responsive</div>
-          <p className="text-center font-lato text-xl">This is a simple website to share posts</p>
         </div>
 
       </div>

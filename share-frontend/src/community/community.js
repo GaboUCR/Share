@@ -3,6 +3,7 @@ import {Link, useParams} from "react-router-dom";
 
 export function BrowseCommunities(){
   const[comm, getComms] = useState([]);
+  const title = <div className="text-center font-lato text-xl">Click any community to read their posts</div>
 
   useEffect(()=>{
     const requestOptions = {method: 'GET'};
@@ -23,7 +24,7 @@ export function BrowseCommunities(){
     return <h2 className="cursor-wait text-center">Loading</h2>
   }
   else{
-    return <div className="grid justify-items-center space-y-5">{comm}</div>
+    return <div className="grid justify-items-center space-y-5">{title}{comm}</div>
   }
 }
 
