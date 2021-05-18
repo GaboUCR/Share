@@ -139,12 +139,12 @@ export function CommunityForm(props){
       <div className = "my-10">
 
         <form className="m-10" onSubmit={handleSubmit}>
-          <label htmlFor="comm">Name your community</label>
+          <label className="font-oxy font-normal text-lg" htmlFor="comm">Name your community</label>
             <div>
               <input className="border w-72" type="text" id="comm" value={commName} onChange={nameChange}/>
             </div>
 
-          <label className ="" htmlFor="description">Set a description for your community</label>
+          <label className="font-oxy font-normal text-lg" htmlFor="description">Write a description for your community</label>
             <div>
             <textarea className="border h-96 w-72" id="description" value={commDescription} onChange={descriptionChange}></textarea>
             </div>

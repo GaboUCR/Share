@@ -38,15 +38,15 @@ function TextEditor(props){
 
   return(
     <div className="grid justify-items-center">
-      <div className = "my-16 outline-editor bg-white">
+      <div className = "my-10">
         <form onSubmit={handleSubmit} className = "space-y-4 m-6">
 
-        <label className ="" htmlFor="Title">Title</label>
+        <label className ="font-oxy font-normal text-lg" htmlFor="Title">Title</label>
           <div>
           <input type="text" className="border w-72" id="Title" value={title} onChange={titleChange} />
           </div>
 
-        <label className ="" htmlFor="body">body</label>
+        <label className ="font-oxy font-normal text-lg" htmlFor="body">body</label>
           <div>
           <textarea className="border h-96 w-72" id="body" value={body} onChange={bodyChange}> </textarea>
           </div>
