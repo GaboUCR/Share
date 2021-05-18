@@ -37,33 +37,35 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className = "space-y-4">
-        <div className ="">
-          <label className ="" htmlFor="username">Username</label>
-          <div>
-            <input type="text" className="border" id="username" value={this.state.name} onChange={this.changeName} />
+      <div className="grid justify-items-center">
+        <form onSubmit={this.handleSubmit} className = "my-4 space-y-4">
+          <div className ="">
+            <label className ="" htmlFor="username">Username</label>
+            <div>
+              <input type="text" className="border" id="username" value={this.state.name} onChange={this.changeName} />
+            </div>
           </div>
-        </div>
 
-        <div className ="">
-          <label className =""  htmlFor="email">Email</label>
-          <div>
-            <input type="email" className="border" id="email" value={this.state.email} onChange={this.changeEmail} />
+          <div className ="">
+            <label className =""  htmlFor="email">Email</label>
+            <div>
+              <input type="email" className="border" id="email" value={this.state.email} onChange={this.changeEmail} />
+            </div>
+            <div>We will never share your email with anyone else.</div>
           </div>
-          <div>We will never share your email with anyone else.</div>
-        </div>
 
-        <div className ="">
-          <label className ="" htmlFor="password">Password</label>
-          <div>
-            <input type="password" className="border" id="password" value={this.state.password} onChange={this.changePassword} />
+          <div className ="">
+            <label className ="" htmlFor="password">Password</label>
+            <div>
+              <input type="password" className="border" id="password" value={this.state.password} onChange={this.changePassword} />
+            </div>
+            <div>You password will be encrypted with argon2</div>
           </div>
-          <div>You password will be encrypted with argon2</div>
-        </div>
 
-        <input type="submit" className ="" value="Submit" />
+          <input type="submit" className ="" value="Submit" />
 
-      </form>
+        </form>
+      </div>
     );
   }
 }

@@ -1,7 +1,7 @@
 import TopNavigation from "./TopNavigation.js"
 import React, {useState} from 'react'
 import {SignUp, LogIn} from "./forms"
-import {BrowseCommunities, CommunityForm, TextEditor, CommunityPosts, Post} from "./posts"
+import {BrowseCommunities, CommunityForm, TextEditor, CommunityPosts, Post} from "./community"
 import {
   BrowserRouter as Router,
   Switch,

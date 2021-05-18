@@ -35,7 +35,6 @@ class LogIn extends React.Component {
 
       else if(data.error === 'wrong credential'){
         alert('user not found')
-
       }
   });
     event.preventDefault();
@@ -44,30 +43,30 @@ class LogIn extends React.Component {
 
   render() {
     return (
+      <div className="grid justify-items-center">
+        <form onSubmit={this.handleSubmit} className = "my-5 space-y-4">
 
-      <form onSubmit={this.handleSubmit} className = "space-y-4">
+          <div className ="">
 
-        <div className ="">
-
-          <label className ="" htmlFor="username">Username or email</label>
-            <div>
-            <input type="text" className="border" id="username" value={this.state.name} onChange={this.changeName} />
-            </div>
-        </div>
-
-        <div className ="">
-
-          <label className ="" htmlFor="password">Password</label>
-          <div>
-          <input type="password" className="border" id="password" value={this.state.password} onChange={this.changePassword} />
+            <label className ="" htmlFor="username">Username or email</label>
+              <div>
+              <input type="text" className="border" id="username" value={this.state.name} onChange={this.changeName} />
+              </div>
           </div>
-          <div>You password will be encrypted with argon2</div>
-        </div>
 
-        <input type="submit" className ="" value="Submit" />
+          <div className ="">
 
-      </form>
+            <label className ="" htmlFor="password">Password</label>
+            <div>
+            <input type="password" className="border" id="password" value={this.state.password} onChange={this.changePassword} />
+            </div>
+            <div>You password will be encrypted with argon2</div>
+          </div>
 
+          <input type="submit" className ="" value="Submit" />
+
+        </form>
+      </div>
 
     );
   }
