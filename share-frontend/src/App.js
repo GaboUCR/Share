@@ -32,7 +32,7 @@ function App() {
           </Route>
 
           <Route exact path="/">
-            <Home />
+            <Home setId={idRequest} />
           </Route>
 
           <Route exact path="/create-community">
@@ -55,8 +55,8 @@ function App() {
             <TextEditor id={id} />
           </Route>
 
-          <Route exact path="/patito">
-            <h2>perrito </h2>
+          <Route exact path="/icons">
+            <Icons />
           </Route>
 
         </Switch>
@@ -64,15 +64,41 @@ function App() {
   );
 };
 
-function Home(){
-	return(
+function Icons(){
+
+  return(
     <div>
-      <div>Icon for the community tab made by <a href="https://creativemarket.com/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-      <div>Icon for the page logo made by <a href="https://creativemarket.com/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> </div>
-      <div>Icon for start a community made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-      <div>Icon for write a post tab made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-      <div>Icon for the user made by <a href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      <div>Icon for the community tab made by <a className="font-bold" href="https://creativemarket.com/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      <div>Icon for the page logo made by <a className="font-bold" href="https://creativemarket.com/eucalyp" title="Eucalyp">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> </div>
+      <div>Icon for start a community made by <a className="font-bold" href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      <div>Icon for write a post tab made by <a className="font-bold" href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+      <div>Icon for the user made by <a className="font-bold" href="https://www.flaticon.com/authors/kiranshastry" title="Kiranshastry">Kiranshastry</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
+  );
+}
+
+
+function Home(props){
+
+  function handleClick(event){
+    event.preventDefault()
+    props.setId(1)
+  }
+
+  return(
+      <div>
+        <div className="grid space-y-28">
+
+          <div className="text-center font-lato text-xl">Welcome to Share, a simple platform to share posts within communities <div className="my-3"> <button onClick={handleClick} className="font-oxy text-light-blue p-1 border rounded">Log as a guest</button> </div> </div>
+
+          <div className="grid justify-items-center text-center font-lato font-bold text-3xl">Made on<img src="/react-logo.jpg" /> <img src="/flask-logo.jpg" />  </div>
+
+          <div className="text-center font-lato text-xl">Responsive</div>
+          <p className="text-center font-lato text-xl">This is a simple website to share posts</p>
+        </div>
+
+      </div>
+
 );
 }
 

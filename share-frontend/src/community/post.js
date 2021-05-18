@@ -5,11 +5,11 @@ function PostPreview(props){
   const address = "/communities/"+props.commName+"/"+props.title
 
   return(
-    <div className="border rounded border-bor-comm mx-80">
+    <div className="border rounded border-bor-comm sm:mx-5 lg:mx-60 xl:mx-80">
       <Link to={address}>
         <div className="text-center font-oxy font-black text-lg">{props.title}</div>
         <div className="text-center font-oxy font-normal text-sm">by {props.username}</div>
-        <div className="my-3 font-oxy font-normal text-sm">{props.body}
+        <div className="my-3 px-3 font-oxy font-normal text-xs sm:text-base">{props.body}
         <div className="text-center font-oxy font-black text-sm">Read the rest of this post>>> </div>
         </div>
       </Link>
@@ -47,7 +47,7 @@ export function CommunityPosts(){
     return <h2 className="cursor-wait text-center">Loading</h2>
   }
   else{
-    return <div className="grid justify-items-center py-5 space-y-5">{posts}</div>
+    return <div className="grid py-5 space-y-5">{posts}</div>
   }
 
 }
@@ -66,10 +66,10 @@ export function Post(){
     .then((data) => {
 
       if (data.success === true){
-      getPost(<div className="grid justify-items-center my-5 mx-32 space-y-5">
-                <div className="text-center font-oxy font-black text-lg">{postName}</div>
+      getPost(<div className="grid justify-items-center space-y-5 my-5 mx-3 sm:mx-12 md:mx-24 lg:mx-36 xl:mx-48 2xl:mx-60">
+                <div className="text-center font-oxy font-black text-lg md:text-3xl">{postName}</div>
                 <div className="text-center font-oxy font-normal text-sm">by {data.post.username}</div>
-                <div >{data.post.body}</div>
+                <div className="border rounded border-bor-comm p-2 font-lato text-xs lit:text-sm litx:text-base sm:text-lg" >{data.post.body}</div>
               </div>
             );
 

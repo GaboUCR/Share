@@ -23,7 +23,7 @@ export function BrowseCommunities(){
     return <h2 className="cursor-wait text-center">Loading</h2>
   }
   else{
-    return <div className="grid justify-items-center py-5 space-y-5">{comm}</div>
+    return <div className="grid justify-items-center space-y-5">{comm}</div>
   }
 }
 
@@ -82,11 +82,11 @@ export function CommunityForm(props){
 }
 
 function CommunityTumbnail(props){
-  const name =  <div className="text-center font-oxy font-black text-3xl">{props.comm_name}</div>
-  const author = <div className="text-center font-oxy font-normal text-sm">by {props.author}</div>
-  const description = <div className="font-oxy font-semibold">{props.description}</div>
+  const name =  <div className="text-center font-oxy font-black text-xl sm:text-3xl">{props.comm_name}</div>
+  const author = <div className="text-center font-oxy font-normal text-xs sm:text-sm">by {props.author}</div>
+  const description = <div className="font-oxy font-semibold text-xs lit:text-sm litx:text-base sm:text-lg">{props.description}</div>
 
-  const comm = <div className="border rounded border-bor-comm space-y-2 px-24 py-5 mx-24 my-5">{name}{author}{description}</div>
+  const comm = <div className="border rounded border-bor-comm space-y-2 py-5 my-5 px-5 mx-5 sm:px-5 sm:mx-12 lg:mx-48 xl:mx-64">{name}{author}{description}</div>
   return(
     <Link to={"/communities/"+props.comm_name}>{comm}</Link>
   )
