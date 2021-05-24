@@ -6,3 +6,10 @@ services:
       - "5000:5000"
     environment:
       FLASK_ENV: development
+    volumes:
+      - ./share-backend/server/database/share.sqlite3:~/db
+
+  share-frontend:
+    build: ./share-frontend/.
+    ports:
+      - "3000:3000"
