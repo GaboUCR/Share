@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="grid justify-items-center">
+  <div class = "my-10">
+    <form method="post" class = "m-10">
+
+        <label class="font-normal text-lg" for="title">Title</label><br>
+        <input class="border w-72" type="text" id="title" name="title" required><br>
+
+        <label class="font-normal text-lg" for="Body">Body</label><br>
+        <textarea class="border h-96 w-72" type="text" name="body" id="Body" required> </textarea><br>
+
+        <label class="font-normal text-lg" for="comm">Choose a community for your post</label><br>
+        <input class="border w-72" type="text" id="comm" name="comm_name" required><br>
+
+        <input type="submit" value="Add post">
+
+    </form>
+  </div>
+</div>
+
+{% endblock %}

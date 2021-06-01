@@ -25,18 +25,21 @@ def start_community():
 
 
 @post_bp.route('/add-post', methods=('POST','GET'))
+@login_required
 def add_post():
     if (request.method == 'POST'):
         comm = {"title":request.form["title"], "body":request.form["body"], \
-                "user_id":request.form["user_id"], "comm_name":request.form["comm_name"]}
+                "user_id":g.user['id'], "comm_name":request.form["comm_name"]}
 
         msg = save_post(comm)
 
         if (msg == PostMsg.ok):
-            return jsonify({"success":True })
+            flash("added post successfully")
 
         elif(msg == PostMsg.community_not_found):
-            return jsonify({"success":False, 'error':'community_not_found'})
+            flash("Community "+request.form["comm_name"]+" not found")
+
+    return render_template('post/add_post.html')
 
 
 @post_bp.route('/get-post-by-name',  methods=('POST',))
