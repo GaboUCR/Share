@@ -52,4 +52,6 @@ def log_user(user):
 
 
 def get_user(user_id):
-    return get_db().execute('SELECT * FROM user WHERE id=?',(user_id,)).fetchone()[0]
+    user = get_db().execute('SELECT username, email, id FROM user WHERE id=?',(user_id,)).fetchone()
+
+    return {'username':user[0], 'email':user[1], 'id':user[2]}

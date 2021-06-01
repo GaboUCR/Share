@@ -39,12 +39,13 @@ def log_in():
         user_id = log_user(user)
 
         if user_id == -1:
-            return jsonify({"success":False, "error":"wrong credential"})
+            flash("Incorrect user or password, please try again")
+            return redirect("/log-in")
 
         else:
             session.clear()
             session["user_id"] = user_id
-            return redirect(url_for())
+            return redirect("/")
 
     return render_template("auth/login.html")
 
@@ -58,6 +59,10 @@ def req_username():
     return jsonify({'success':True, 'username':get_username(request.json["id"])})
 
 
+@auth_bp.route('/logout')
+def log_out():
+    session.clear()
+    return redirect('/')
 
 @auth_bp.route("/database")
 def ts():
@@ -72,7 +77,7 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = get_username(user_id)
+        g.user = get_user(user_id)
 
 
 
@@ -83,7 +88,8 @@ def login_required(call):
         user_id = session.get("user_id")
 
         if (user_id is None):
-            return jsonify({"success":False, "error":"not logged"})
+            flash("Log in to continue")
+            return redirect('/log-in')
 
         return call(**arguments)
 

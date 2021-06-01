@@ -1,35 +1,42 @@
 from server.database.db_post_api import add_community, get_all_communities, save_post, get_posts_preview_by_community, get_post_by_name
-from flask import jsonify, Blueprint, request
+from flask import jsonify, Blueprint, request, render_template, g, flash
 from server.msg import SignFormMsg, PostMsg
+from server.auth import login_required
 import time
 post_bp = Blueprint("post", __name__)
 
-@post_bp.route('/create-community', methods=('POST',))
+
+@post_bp.route('/create-community', methods=('POST','GET'))
+@login_required
 def start_community():
-    comm = {"comm_name":request.json["comm_name"], 'comm_description':request.json['comm_description'] ,\
-            "user_id":request.json["user_id"]}
+    if (request.method == 'POST'):
+        comm = {"comm_name":request.form["comm_name"], 'comm_description':request.form['comm_description'] ,\
+                "user_id":g.user['id']}
+        print(g.user['id'])
+        msg = add_community(comm)
 
-    msg = add_community(comm)
+        if (msg == SignFormMsg.ok):
+            flash("Community added successfully")
 
-    if (msg == SignFormMsg.ok):
-        return jsonify({"success":True })
+        elif(msg == SignFormMsg.repeated_name):
+            flash("That community already exists")
 
-    elif(msg == SignFormMsg.repeated_name):
-        return jsonify({"success":False, 'error':'repeated_name'})
+    return render_template('post/create_community.html')
 
 
-@post_bp.route('/add-post', methods=('POST',))
+@post_bp.route('/add-post', methods=('POST','GET'))
 def add_post():
-    comm = {"title":request.json["title"], "body":request.json["body"], \
-            "user_id":request.json["user_id"], "comm_name":request.json["comm_name"]}
+    if (request.method == 'POST'):
+        comm = {"title":request.form["title"], "body":request.form["body"], \
+                "user_id":request.form["user_id"], "comm_name":request.form["comm_name"]}
 
-    msg = save_post(comm)
+        msg = save_post(comm)
 
-    if (msg == PostMsg.ok):
-        return jsonify({"success":True })
+        if (msg == PostMsg.ok):
+            return jsonify({"success":True })
 
-    elif(msg == PostMsg.community_not_found):
-        return jsonify({"success":False, 'error':'community_not_found'})
+        elif(msg == PostMsg.community_not_found):
+            return jsonify({"success":False, 'error':'community_not_found'})
 
 
 @post_bp.route('/get-post-by-name',  methods=('POST',))
