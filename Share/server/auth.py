@@ -1,25 +1,30 @@
 from functools import wraps
 from server.msg import SignFormMsg
-from flask import g, session, jsonify, Blueprint, request, make_response
+from flask import g, session, jsonify, Blueprint, request, make_response, render_template, url_for
+from flask import flash, redirect
 from werkzeug.security import generate_password_hash
 from server.database.db import print_database
-from server.database.db_users_api import add_user, log_user, get_username
+from server.database.db_users_api import add_user, log_user, get_user
 auth_bp = Blueprint("auth", __name__)
-
 
 @auth_bp.route("/sign-up", methods=("POST","GET"))
 def sign_up():
 
-    new_user = {"username":request.json["name"],"email":request.json["email"], \
-                "password":generate_password_hash(request.json["password"])}
+    if request.method == "POST":
 
-    msg = add_user(new_user)
+        new_user = {"username":request.form["name"],"email":request.form["email"], \
+                    "password":generate_password_hash(request.form["password"])}
 
-    if (msg == SignFormMsg.ok):
-        return jsonify({"success":True })
+        msg = add_user(new_user)
 
-    elif(msg == SignFormMsg.repeated_name):
-        return jsonify({"success":False, 'error':'repeated_name'})
+        if (msg == SignFormMsg.ok):
+            flash("account created successfully, please log in")
+            return redirect("/log-in")
+
+        elif(msg == SignFormMsg.repeated_name):
+            flash("That name is already taken")
+
+    return render_template("auth/register.html")
 
 
 @auth_bp.route('/log-in',methods=('POST','GET'))
@@ -29,14 +34,20 @@ def log_in():
     password gets checked in the DatabaseApi.
     It returns the user id
     """
-    user = {"user":request.json["user"], "password":request.json["password"]}
-    user_id = log_user(user)
+    if (request.method =='POST'):
+        user = {"user":request.form["user"], "password":request.form["password"]}
+        user_id = log_user(user)
 
-    if user_id == -1:
-        return jsonify({"success":False, "error":"wrong credential"})
+        if user_id == -1:
+            return jsonify({"success":False, "error":"wrong credential"})
 
-    else:
-        return jsonify({"success":True, 'user_id':user_id})
+        else:
+            session.clear()
+            session["user_id"] = user_id
+            return redirect(url_for())
+
+    return render_template("auth/login.html")
+
 
 
 @auth_bp.route('/user',methods=('POST','GET'))
@@ -50,18 +61,30 @@ def req_username():
 
 @auth_bp.route("/database")
 def ts():
-    return str(print_database())
+    return render_template("base.html")
 
 
-# def login_required(call):
-#
-#     @wraps(call)
-#     def check_credential(**arguments):
-#         user_id = session.get("user_id")
-#
-#         if (user_id is None):
-#             return jsonify({"success":False, "error":"not logged"})
-#
-#         return call(**arguments)
-#
-#     return check_credential
+@auth_bp.before_app_request
+def load_logged_in_user():
+
+    user_id = session.get("user_id")
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = get_username(user_id)
+
+
+
+def login_required(call):
+
+    @wraps(call)
+    def check_credential(**arguments):
+        user_id = session.get("user_id")
+
+        if (user_id is None):
+            return jsonify({"success":False, "error":"not logged"})
+
+        return call(**arguments)
+
+    return check_credential

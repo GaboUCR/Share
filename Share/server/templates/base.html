@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/static/share-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+
+    <title>Share</title>
+  </head>
+  <body>
+
+    <div class="min-h-screen">
+      {%if g.user%}
+      <nav class = "flex bg-top-nav">
+          <a href = "/" class ="hidden sm:inline p-4 hover:bg-nav-a text-nav-a-text">Share</a>
+          <a href = "/" class ="inline sm:hidden p-4 hover:bg-nav-a"><img src= "/static/Top-nav-Buttons/HomeLogo.png" ></a>
+
+          <a href="/communities" class="hidden sm:inline p-4 hover:bg-nav-a text-nav-a-text">Communities</a>
+          <a href="/communities" class="inline sm:hidden p-4 hover:bg-nav-a"> <img src= "/static/Top-nav-Buttons/CommunitiesLogo.png"> </a>
+
+          <nav class="flex absolute right-0">
+            <a class="hidden sm:inline p-4 hover:bg-nav-a text-nav-a-text" href='/create-community'>Start your community</a>
+            <a class="inline sm:hidden p-4 hover:bg-nav-a" href='/create-community'> <img src= "/static/Top-nav-Buttons/AddCommunity.png" > </a>
+
+            <a class="p-4 hidden sm:inline hover:bg-nav-a text-nav-a-text" href='/write'>write a post</a>
+            <a class="p-4 inline sm:hidden hover:bg-nav-a" href='/write'> <img src= "/static/Top-nav-Buttons/WritePost.png" > </a>
+
+            <a class="p-4 hidden sm:inline inline hover:bg-nav-a text-nav-a-text">{{g.user['username']}}</a>
+            <a class="p-4 inline sm:hidden hover:bg-nav-a"> <img src="/static/Top-nav-Buttons/User.png"> </a>
+          </nav>
+      </nav>
+      {%else%}
+      <nav class = "flex bg-top-nav">
+        <a href = "/" class ="hidden sm:inline p-4 hover:bg-nav-a text-nav-a-text">Share</a>
+        <a href = "/" class ="inline sm:hidden p-4 hover:bg-nav-a"><img src= "/static/Top-nav-Buttons/HomeLogo.png" ></a>
+
+        <a href="/communities" class="hidden sm:inline p-4 hover:bg-nav-a text-nav-a-text">Communities</a>
+        <a href="/communities" class="inline sm:hidden p-4 hover:bg-nav-a"> <img src= "/static/Top-nav-Buttons/CommunitiesLogo.png"> </a>
+
+        <nav class="flex my-5 absolute right-0" >
+          <a href = "/log-in" class="mx-5">Log in</a>
+          <a href = "/sign-up" class ="mx-5" >Sign up</a>
+        </nav>
+
+      </nav>
+      {% endif %}
+
+      {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+      {% endfor %}
+
+      {% block content %} {% endblock %}
+    </div>
+  </body>
+</html>

@@ -51,5 +51,5 @@ def log_user(user):
     return -1
 
 
-def get_username(user_id):
-    return get_db().execute('SELECT username FROM user WHERE id=?',(user_id,)).fetchone()[0]
+def get_user(user_id):
+    return get_db().execute('SELECT * FROM user WHERE id=?',(user_id,)).fetchone()[0]
