@@ -1,0 +1,15 @@
+{%extends 'base.html' %}
+
+{% block content %}
+  <div class="text-center text-xl">Click any community to read their posts</div>
+  {% for comm in comms %}
+    <a href={{"/communities/"+comm["comm_name"].replace(" ", "-")}}>
+      <div class="border rounded space-y-2 py-5 my-5 px-5 mx-5 sm:px-5 sm:mx-12 lg:mx-48 xl:mx-64">
+        <div class="text-center font-normal text-xl sm:text-3xl">{{comm["comm_name"]}}</div>
+        <div class="text-center font-normal text-xs sm:text-sm">by {{comm["username"]}}</div>
+        <div class="font-semibold text-xs sm:text-lg">{{comm["comm_description"]}}</div>
+      </div>
+    </a>
+  {% endfor %}
+
+{% endblock %}

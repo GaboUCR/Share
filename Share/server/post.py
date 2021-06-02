@@ -52,21 +52,21 @@ def serve_post():
         return jsonify({'success':True, 'post':post})
 
 
-@post_bp.route('/get-posts-preview-by-community',  methods=('POST',))
-def serve_community_posts_info():
-    posts = get_posts_preview_by_community(request.json['comm_name'])
+@post_bp.route('/communities/<comm_name>',  methods=('GET','POST'))
+def serve_community_posts_info(comm_name):
+    posts = get_posts_preview_by_community(comm_name)
 
     if (posts == []):
-        return jsonify({"success":False, 'error':'empty'})
+        flash("No communities found")
 
-    else:
-        return jsonify({'success':True, 'posts':posts})
+    return render_template("post/post_preview.html", posts=posts, comm_name=comm_name)
 
 
-@post_bp.route('/get-communities-names')
+@post_bp.route('/communities')
 def get_comm_names():
     comms = get_all_communities()
-    return jsonify({'success':True, 'comms':comms})
+
+    return render_template('post/communities.html', comms = comms)
 
 
 @post_bp.route('/check')
