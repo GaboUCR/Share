@@ -27,7 +27,7 @@ def get_post_by_name(post_name):
     if (post == None):
         return {}
 
-    return {"body":post[1], "username":post[0]}
+    return {"body":post[1], "username":post[0], 'title':post_name}
 
 
 def get_posts_preview_by_community(comm_name):

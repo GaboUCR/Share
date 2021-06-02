@@ -42,7 +42,7 @@ def print_database():
     conn = sqlite3.connect("server/database/share.sqlite3")
     cur = conn.cursor()
 
-    t = cur.execute("select * from community").fetchall()
+    t = cur.execute("select * from post").fetchall()
     cur.close()
     conn.close()
     return t
