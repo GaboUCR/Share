@@ -26,7 +26,7 @@ module.exports = {
     },
     colors: {
       // Build your palette here
-      "top-nav" : "#E28048",
+      "top-nav" : "#FF7400",
       "background": "#EBD8CA",
       "white" : "#F8FFFC",
       "nav-link" : "#FC5C00",

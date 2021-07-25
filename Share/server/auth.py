@@ -49,6 +49,9 @@ def log_in():
 
     return render_template("auth/login.html")
 
+@auth_bp.route('/user/<username>')
+def user_tab (username):
+    return render_template("auth/user.html")
 
 
 @auth_bp.route('/user',methods=('POST','GET'))
@@ -58,6 +61,10 @@ def req_username():
     """
     return jsonify({'success':True, 'username':get_username(request.json["id"])})
 
+@auth_bp.route('/guest')
+def guest():
+    session['user_id'] = 7
+    return redirect('/')
 
 @auth_bp.route('/logout')
 def log_out():
@@ -66,7 +73,7 @@ def log_out():
 
 @auth_bp.route("/database")
 def ts():
-    return render_template("base.html")
+    return str(print_database())
 
 
 @auth_bp.before_app_request

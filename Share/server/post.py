@@ -68,7 +68,7 @@ def serve_post(comm_name, post_name):
 
 @post_bp.route('/communities/<comm_name>',  methods=('GET','POST'))
 def serve_community_posts_info(comm_name):
-    posts = get_posts_preview_by_community(comm_name)
+    posts = get_posts_preview_by_community(comm_name.replace('-', ' '))
 
     if (posts == []):
         flash("No posts available")
