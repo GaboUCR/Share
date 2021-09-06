@@ -1,11 +1,10 @@
 From python:latest
+
 ADD . .
 
-ENV FLASK_APP=server
-ENV FLASK_RUN_HOST=0.0.0.0
-
 Run pip install flask
-Run pip install flask-cors
+Run pip install waitress
 
-expose 5000
-CMD ["flask", "run"]
+
+
+Run waitress-serve --call 'server:create_app'

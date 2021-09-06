@@ -1,0 +1,9 @@
+
+services:
+  share:
+    build: ./.
+    ports:
+      - "5000:8080"
+
+    volumes:
+      - ./server/database/share.sqlite3:~/Desktop

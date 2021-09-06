@@ -82,6 +82,9 @@ def get_comm_names():
 
     return render_template('post/communities.html', comms = comms)
 
+@post_bp.route("/")
+def home():
+    return render_template('home.html')
 
 @post_bp.route('/check')
 def just():
