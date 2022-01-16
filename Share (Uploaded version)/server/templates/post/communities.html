@@ -1,15 +1,16 @@
 {%extends 'base.html' %}
 
 {% block content %}
-  <div class="text-center text-xl">Click any community to read their posts</div>
+  <div class="grid py-5 space-y-5">
   {% for comm in comms %}
-    <a href={{"/communities/"+comm["comm_name"].replace(" ", "-")}}>
-      <div class="border rounded space-y-2 py-5 my-5 px-5 mx-5 sm:px-5 sm:mx-12 lg:mx-48 xl:mx-64">
-        <div class="text-center font-normal text-xl sm:text-3xl">{{comm["comm_name"]}}</div>
-        <div class="text-center font-normal text-xs sm:text-sm">by {{comm["username"]}}</div>
-        <div class="font-semibold text-xs sm:text-lg">{{comm["comm_description"]}}</div>
-      </div>
-    </a>
-  {% endfor %}
+    <div class="bg-white py-3 px-3 rounded sm:mx-5 lg:mx-60 xl:mx-25 overflow-hidden">
+      <a href={{"/communities/"+comm["comm_name"].replace(" ", "-")}}>
 
+          <div class="text-center font-medium text-xl sm:text-3xl">{{comm["comm_name"]}}</div>
+          <div class="text-center font-normal text-xs sm:text-sm">founded by {{comm["username"]}}</div>
+          <div class="text-center font-normal my-2 text-xs sm:text-lg">{{comm["comm_description"]}}</div>
+      </a>
+    </div>
+  {% endfor %}
+  </div>
 {% endblock %}

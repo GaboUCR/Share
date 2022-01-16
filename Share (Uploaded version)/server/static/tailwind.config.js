@@ -1,5 +1,6 @@
 module.exports = {
-  darkMode: false, // or 'media' or 'class'
+  darkMode: false,
+  content: ["../templates/*.{html,js}"],
   theme: {
 
     screens:{
@@ -26,7 +27,7 @@ module.exports = {
     colors: {
       // Build your palette here
       "top-nav" : "#FF7400",
-      "background": "#EBD8CA",
+      "background": "#f3432f",
       "white" : "#F8FFFC",
       "nav-link" : "#AB560F",
       "nav-link-text": "#451C00",

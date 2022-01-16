@@ -2,20 +2,14 @@
 
 {% block content %}
 
-<div class="grid justify-items-center">
-  <div class = "my-10">
-    <form method="post" class = "m-10">
+  <form style="border-color:#e7e7e7"  method="post" class = "p-3 border-t h-screen w-full bg-white">
 
-        <label class="font-normal text-lg" for="comm">Title</label><br>
-        <input class="border w-72" type="text" id="comm" name="comm_name" required><br>
+      <input style="border-color:#e7e7e7" class="border w-full p-2 my-4" placeholder="Name your community" type="text" id="comm" name="comm_name" required>
 
-        <label class="font-normal text-lg" for="description">Description</label><br>
-        <textarea class="border h-96 w-72" type="text" name="comm_description" id="description" required> </textarea><br>
+      <div style="background-color:#ebe9ec;border-color:#e7e7e7" class="border-r border-l border-t py-2 text-center">Description</div>
+      <textarea style="border-color:#e7e7e7" class="border h-80 w-full p-2" placeholder="Description"  type="text" name="comm_description" id="description" required></textarea>
+      <input style="background-color:#ebe9ec" class="p-3 my-2" type="submit" value="Add community">
 
-        <input type="submit" value="Add community">
-
-    </form>
-  </div>
-</div>
+  </form>
 
 {% endblock %}

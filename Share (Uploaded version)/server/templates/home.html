@@ -1,12 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div>
+<div class="grid py-5 space-y-5">
+
+{% for post in posts %}
+<div class="bg-white my-3 py-3 rounded sm:mx-5 lg:mx-60 xl:mx-25 overflow-hidden">
+  <a href={{("/communities/"+post["community"]+"/"+post['title']).replace(" ", "-")}}>
+
+    <div class="text-center font-medium text-2xl">{{post["community"]}}</div>
+    <div class="text-center font-normal text-xl">{{post["title"]}}</div>
+    <div class="text-center font-normal text-sm">by {{post["username"]}}</div>
+    <div class="my-3 px-3 font-normal text-xs sm:text-base">{{post["body"]}}</div>
+
+  </a>
+</div>
+{% endfor %}
+
+</div>
+<!-- <div>
   <div>
 
     <div class="text-center text-xl">Welcome to Share, a simple platform to share posts within communities <div class="my-3"> <a href="/guest" class="font-oxy text-light-blue p-1 border rounded">Log as a guest</a> </div> </div>
 
   </div>
-</div>
+</div> -->
 
 {% endblock %}

@@ -13,37 +13,35 @@
 
     <title>Share</title>
   </head>
-  <body>
 
-    <div class="min-h-screen">
+  <body  style="background-color:#ebe9ec">
+
       {%if g.user%}
-      <nav class = "flex text-lg bg-top-nav">
-          <a href = "/" class ="hidden sm:inline p-4 hover:bg-nav-link text-nav-link-text">Share</a>
-          <a href = "/" class ="inline sm:hidden p-4 hover:bg-nav-link"><img src= "/static/Top-nav-Buttons/HomeLogo.png" ></a>
-
-          <a href="/communities" class="hidden sm:inline p-4 hover:bg-nav-link text-nav-link-text">Communities</a>
-          <a href="/communities" class="inline sm:hidden p-4 hover:bg-nav-link"> <img src= "/static/Top-nav-Buttons/CommunitiesLogo.png"> </a>
+      <nav class = "flex text-lg bg-white">
+          <!-- <a href = "/" class ="hidden sm:inline p-4  text-nav-link-text">Share</a> -->
+          <a href = "/" class ="p-4 "><img src= "/static/Top-nav-Buttons/home.png" ></a>
+          <a class="p-4  text-nav-link-text" href='/communities'>Communities</a>
 
           <nav class="flex absolute right-0">
-            <a class="hidden sm:inline p-4 hover:bg-nav-link text-nav-link-text" href='/create-community'>Start your community</a>
-            <a class="inline sm:hidden p-4 hover:bg-nav-link" href='/create-community'> <img src= "/static/Top-nav-Buttons/AddCommunity.png" > </a>
+            <a class="hidden sm:inline p-4  text-nav-link-text" href='/create-community'>Start your community</a>
+            <a class="inline sm:hidden p-4 " href='/create-community'> <img src= "/static/Top-nav-Buttons/AddCommunity.png" > </a>
 
-            <a class="p-4 hidden sm:inline hover:bg-nav-link text-nav-link-text" href='/add-post'>write a post</a>
-            <a class="p-4 inline sm:hidden hover:bg-nav-link" href='/add-post'> <img src= "/static/Top-nav-Buttons/WritePost.png" > </a>
+            <a class="p-4 hidden sm:inline  text-nav-link-text" href='/add-post'>write a post</a>
+            <a class="p-4 inline sm:hidden " href='/add-post'> <img src= "/static/Top-nav-Buttons/WritePost.png" > </a>
 
-            <a href="/user/{{g.user['username']}}" class="p-4 hidden sm:inline inline hover:bg-nav-link text-nav-link-text">{{g.user['username']}}</a>
-            <a href="/user/{{g.user['username']}}"class="p-4 inline sm:hidden hover:bg-nav-link"> <img src="/static/Top-nav-Buttons/User.png"> </a>
+            <a href="/user/{{g.user['username']}}" class="p-4 hidden sm:inline inline  text-nav-link-text">{{g.user['username']}}</a>
+            <a href="/user/{{g.user['username']}}"class="p-4 inline sm:hidden "> <img src="/static/Top-nav-Buttons/User.png"> </a>
           </nav>
       </nav>
       {%else%}
-      <nav class = "flex bg-top-nav text-lg">
-        <a href = "/" class ="hidden sm:inline p-4 hover:bg-nav-link text-nav-link-text">Share</a>
-        <a href = "/" class ="inline sm:hidden p-4 hover:bg-nav-link"><img src= "/static/Top-nav-Buttons/HomeLogo.png" ></a>
+      <nav class = "flex text-lg bg-white">
+        <!-- <a href = "/" class ="hidden sm:inline p-4  text-nav-link-text">Share</a> -->
+        <a href = "/" class ="p-4 "><img src= "/static/Top-nav-Buttons/home.png" ></a>
 
-        <a href="/communities" class="hidden sm:inline p-4 hover:bg-nav-link text-nav-link-text">Communities</a>
-        <a href="/communities" class="inline sm:hidden p-4 hover:bg-nav-link"> <img src= "/static/Top-nav-Buttons/CommunitiesLogo.png"> </a>
+        <a class="p-4  text-nav-link-text" href='/communities'>Communities</a>
 
         <nav class="flex my-5 absolute right-0" >
+          <a href="/guest" class="mx-5">Log as a guest</a>
           <a href = "/log-in" class="mx-5">Log in</a>
           <a href = "/sign-up" class ="mx-5" >Sign up</a>
         </nav>
@@ -52,10 +50,9 @@
       {% endif %}
 
       {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
+        <div class="flash text-center">{{ message }}</div>
       {% endfor %}
 
       {% block content %} {% endblock %}
-    </div>
   </body>
 </html>

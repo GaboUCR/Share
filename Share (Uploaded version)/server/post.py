@@ -1,4 +1,4 @@
-from server.database.db_post_api import add_community, get_all_communities, save_post, get_posts_preview_by_community, get_post_by_name
+from server.database.db_post_api import add_community, get_all_communities, save_post, get_posts_preview_by_community, get_post_by_name, get_all_posts_preview
 from server.database.db import print_database
 from flask import jsonify, Blueprint, request, render_template, g, flash, redirect
 from server.msg import SignFormMsg, PostMsg
@@ -23,6 +23,7 @@ def start_community():
 
         if (msg == SignFormMsg.ok):
             flash("Community added successfully")
+            return redirect("/communities")
 
         elif(msg == SignFormMsg.repeated_name):
             flash("That community already exists")
@@ -46,6 +47,7 @@ def add_post():
 
         if (msg == PostMsg.ok):
             flash("added post successfully")
+            return redirect("/communities/"+comm["comm_name"])
 
         elif(msg == PostMsg.community_not_found):
             flash("Community "+request.form["comm_name"]+" not found")
@@ -63,7 +65,6 @@ def serve_post(comm_name, post_name):
 
 
     return render_template("post/post.html", post=post)
-
 
 
 @post_bp.route('/communities/<comm_name>',  methods=('GET','POST'))
@@ -84,7 +85,8 @@ def get_comm_names():
 
 @post_bp.route("/")
 def home():
-    return render_template('home.html')
+    posts = get_all_posts_preview()
+    return render_template('home.html', posts=posts)
 
 @post_bp.route('/check')
 def just():

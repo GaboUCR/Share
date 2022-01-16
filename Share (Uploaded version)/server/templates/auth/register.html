@@ -1,19 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="grid justify-items-center">
-<form method="post" class = "my-5 space-y-4">
+<div class="grid justify-items-center m-20">
+  <form method="post" class = "place-self-center p-6 space-y-4 rounded-lg bg-white">
 
-   <label for="name">name</label><br>
-   <input class="border" name="name" id="name" required><br>
+    <div>
+      <input type="text" class="border text-lg px-2 h-10 w-72" name="name" id="name" placeholder="Enter your name" />
+    </div>
 
-   <label for="email">email</label><br>
-   <input class="border" type="email" name="email" id="email" required><br>
+    <div>
+      <input type="text" class="border text-lg px-2 h-10 w-72" name="email" id="email" placeholder="Enter your email" />
+    </div>
 
-   <label for="password">Password</label><br>
-   <input class="border" type="password" name="password" id="password" required><br>
+    <div>
+      <input type="password" class="border text-lg px-2 h-10 w-72" name="password" id="password" placeholder="Password"/>
+    </div>
 
-   <input type="submit" value="Register">
-</form>
+    <input class="w-72 h-10 bg-light-brown" type="submit" value="Log In"/>
+
+  </form>
 </div>
 {% endblock %}

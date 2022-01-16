@@ -29,12 +29,34 @@ def get_post_by_name(post_name):
 
     return {"body":post[1], "username":post[0], 'title':post_name}
 
+def get_all_posts_preview():
+    query = """SELECT post.title, user.username, post.body, community.name FROM post INNER JOIN user ON user.id = post.user_id
+               INNER JOIN community ON community.id = post.community_id"""
+
+    Tposts = get_db().execute(query).fetchall()
+
+    if (len(Tposts) == 0):
+        return []
+
+    posts = []
+
+    for i in range(len(Tposts)-1,-1,-1):
+        #skip smaller posts so that the interface looks better
+        if (len(Tposts[i][2]) < 120):
+            continue
+
+        posts.append(Tposts[i])
+
+
+    return [{"title":title, "community":community, "username":username, "body":body[0:len(body)//4]+"..."} for (title, username, body, community) in posts]
+
+
 
 def get_posts_preview_by_community(comm_name):
     query = """SELECT post.title, user.username, post.body FROM post INNER JOIN user ON user.id = post.user_id
                INNER JOIN community ON community.id = post.community_id WHERE community.name = ?"""
 
-    posts = get_db().execute(query,(comm_name,)).fetchall()
+    posts = get_db().execute(query, (comm_name,)).fetchall()
 
     if (len(posts) == 0):
         return []

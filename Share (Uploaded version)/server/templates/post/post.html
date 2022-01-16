@@ -4,10 +4,12 @@
 {% if post == {} %}
   <div> </div>
 {% else %}
-  <div class="grid justify-items-center space-y-5 my-5 mx-3 sm:mx-12 md:mx-24 lg:mx-36 xl:mx-48 2xl:mx-60">
-    <div class="text-center font-oxy font-black text-lg md:text-3xl">{{post['title']}}</div>
-    <div class="text-center font-oxy font-normal text-sm">by {{post['username']}}</div>
-    <div class="p-2 font-lato text-xs lit:text-sm litx:text-base sm:text-lg" >{{post['body']}}</div>
+  <div class="bg-white h-screen">
+    <div style="border-color:#e7e7e7" class="grid bg-white border-t justify-items-center space-y-5 py-4 px-2">
+      <div class="text-center font-medium text-lg md:text-3xl">{{post['title']}}</div>
+      <div class="text-center font-normal text-sm">by {{post['username']}}</div>
+      <div class="p-2 text-xs lit:text-sm litx:text-base sm:text-lg" >{{post['body']}}</div>
+    </div>
   </div>
 {% endif %}
 
