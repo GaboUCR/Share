@@ -1,58 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/static/share-logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Oxygen" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-    <link href="/static/dist/tailwind.css" rel="stylesheet">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="/static/share-logo.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
 
-    <title>Share</title>
-  </head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oxygen" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link href="/static/dist/tailwind.css" rel="stylesheet">
 
-  <body  style="background-color:#ebe9ec">
+  <title>Share</title>
+</head>
 
-      {%if g.user%}
-      <nav class = "flex text-lg bg-white">
-          <!-- <a href = "/" class ="hidden sm:inline p-4  text-nav-link-text">Share</a> -->
-          <a href = "/" class ="p-4 "><img src= "/static/Top-nav-Buttons/home.png" ></a>
-          <a class="p-4  text-nav-link-text" href='/communities'>Communities</a>
+<body style="background-color:#ebe9ec">
 
-          <nav class="flex absolute right-0">
-            <a class="hidden sm:inline p-4  text-nav-link-text" href='/create-community'>Start your community</a>
-            <a class="inline sm:hidden p-4 " href='/create-community'> <img src= "/static/Top-nav-Buttons/AddCommunity.png" > </a>
+  {%if g.user%}
+  <nav class="flex text-lg bg-white">
+    <!-- <a href = "/" class ="hidden sm:inline p-4  text-nav-link-text">Share</a> -->
+    <a href="/" class="p-4 "><img src="/static/Top-nav-Buttons/home.png"></a>
+    <a class="p-4  text-nav-link-text" href='/communities'>Communities</a>
 
-            <a class="p-4 hidden sm:inline  text-nav-link-text" href='/add-post'>write a post</a>
-            <a class="p-4 inline sm:hidden " href='/add-post'> <img src= "/static/Top-nav-Buttons/WritePost.png" > </a>
+    <nav class="flex absolute right-0">
+      <a class="hidden sm:inline p-4  text-nav-link-text" href='/create-community'>Start your community</a>
+      <a class="inline sm:hidden p-4 " href='/create-community'> <img src="/static/Top-nav-Buttons/AddCommunity.png">
+      </a>
 
-            <a href="/user/{{g.user['username']}}" class="p-4 hidden sm:inline inline  text-nav-link-text">{{g.user['username']}}</a>
-            <a href="/user/{{g.user['username']}}"class="p-4 inline sm:hidden "> <img src="/static/Top-nav-Buttons/User.png"> </a>
-          </nav>
-      </nav>
-      {%else%}
-      <nav class = "flex text-lg bg-white">
-        <!-- <a href = "/" class ="hidden sm:inline p-4  text-nav-link-text">Share</a> -->
-        <a href = "/" class ="p-4 "><img src= "/static/Top-nav-Buttons/home.png" ></a>
+      <a class="p-4 hidden sm:inline  text-nav-link-text" href='/add-post'>write a post</a>
+      <a class="p-4 inline sm:hidden " href='/add-post'> <img src="/static/Top-nav-Buttons/WritePost.png"> </a>
 
-        <a class="p-4  text-nav-link-text" href='/communities'>Communities</a>
+      <a href="/user/{{g.user['username']}}"
+        class="p-4 hidden sm:inline inline  text-nav-link-text">{{g.user['username']}}</a>
+      <a href="/user/{{g.user['username']}}" class="p-4 inline sm:hidden "> <img src="/static/Top-nav-Buttons/User.png">
+      </a>
+    </nav>
+  </nav>
+  {%else%}
+  <nav class="flex text-lg bg-white">
+    <!-- <a href = "/" class ="hidden sm:inline p-4  text-nav-link-text">Share</a> -->
+    <a href="/" class="p-4 "><img src="/static/Top-nav-Buttons/home.png"></a>
 
-        <nav class="flex my-5 absolute right-0" >
-          <a href="/guest" class="mx-5">Log as a guest</a>
-          <a href = "/log-in" class="mx-5">Log in</a>
-          <a href = "/sign-up" class ="mx-5" >Sign up</a>
-        </nav>
+    <a class="p-4 hidden sm:inline text-nav-link-text" href='/communities'>Communities</a>
+    <a class="inline sm:hidden p-4 " href='/commmunities'> <img src="/static/Top-nav-Buttons/CommunitiesLogo.png"> </a>
 
-      </nav>
-      {% endif %}
+    <nav class="flex my-5 absolute right-0">
+      <a href="/guest" class="mx-5 hidden sm:inline">Log as a guest</a>
+      <a href="/log-in" class="mx-5">Log in</a>
+      <a href="/sign-up" class="mx-5">Sign up</a>
+    </nav>
 
-      {% for message in get_flashed_messages() %}
-        <div class="flash text-center">{{ message }}</div>
-      {% endfor %}
+  </nav>
+  {% endif %}
 
-      {% block content %} {% endblock %}
-  </body>
+  {% for message in get_flashed_messages() %}
+  <div class="flash text-center">{{ message }}</div>
+  {% endfor %}
+
+  {% block content %} {% endblock %}
+</body>
+
 </html>
