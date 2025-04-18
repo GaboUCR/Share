@@ -1,5 +1,5 @@
 # Share
-Simple blog website, visit this app at https://share.gabrielgamboa.site
+Simple blog website, visit this app at https://share.gabrielgamboavargas.site
 
 Made with Flask, Tailwindcss, SQLite, uploaded on Digital Ocean using Ubuntu and served with a secure certificate through Caddy.
 
